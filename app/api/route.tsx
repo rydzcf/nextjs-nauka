@@ -1,6 +1,6 @@
 import { NextApiRequest } from "next";
 
-export async function GET(request : NextApiRequest) {
+export async function GET(request : Request) {
    
    const users = [
     {
