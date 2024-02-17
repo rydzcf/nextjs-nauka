@@ -1,7 +1,12 @@
+import Navbar from "@/components/Navbar";
+import Configurator from "@/components/configurator/Configurator";
 import Image from "next/image";
 
 export default function Home() {
   return (
-    <div>hello</div>
+    <>
+    {/* <Navbar /> */}
+    <Configurator category="header" />
+    </>
   );
 }
