@@ -79,6 +79,23 @@ export function GET(request: NextRequest) {
         "size": 160,
         "index": "BOX1-1-1620",
         "addons": ["leg"]
+      },
+    {
+        "name": "BOX2",
+        "category": "bed",
+        "photo": "sl03-p.jpg",
+        "price": 99999,
+        "size": 160,
+        "index": "BOX2-1-1620",
+        "addons": ["leg", "frame", "boxElem"]
+      },
+    {
+        "name": "BOX3",
+        "category": "bed",
+        "photo": "sl03-p.jpg",
+        "price": 99999,
+        "size": 160,
+        "index": "BOX3-1-1620",
       }
     ]
 

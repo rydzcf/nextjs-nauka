@@ -5,7 +5,7 @@ import SelectTex from "@/components/configurator/SelectTex"
 import SelectHeight from './SelectHeight';
 import Select from './Select';
 import { Product } from '@/app/interfaces/api';
-import { getData } from '@/app/utils/configurator';
+import { getData, updateDependencies } from '@/app/utils/configurator';
 import { Req } from '@/app/interfaces/req';
 import SelectHeaderName from './SelectHeaderName';
 import SelectHeaderWidth from './SelectHeaderWidth';
@@ -28,22 +28,20 @@ const [req, setReq] = useState<Req>(
         headerHeight: null,
         boxName: null,
         boxElem: null,
-        dependencies: []
+        dependencies: [],
+        prevDependencies: [],
     }
 )
-
+//zerowanie wyborów przy zmianie size albo gr
 useEffect(() => {
-    setReq({
+    setReq(req => ({
        ...req,
         headerName: null,
         headerWidth: null,
         headerHeight: null,
         boxName: null,
-        boxElem: null,
-
-    })
-},[req.size, req.gr])
-
+    }));
+}, [req.size, req.gr]);
 
 
 const handleSize = (size: number) => {
@@ -77,13 +75,11 @@ const handleHeaderWidth =(headerWidth : string) => {
         headerWidth: headerWidth,
     })
 }
-const handleBoxName =(boxName : string) => {
-    setReq({
-        ...req,
-        boxName: boxName,
-    })
-}
 
+const handleBoxName = (product: Product) => {
+    const updatedReq = updateDependencies(req, product, "boxName");
+    setReq(updatedReq);
+  };
 
     return (
     <div>

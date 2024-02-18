@@ -4,6 +4,7 @@ export interface Dependency {
   }
 
 export interface Req {
+    [key: string]: any,
     size: number,
     gr: string | null,
     tex: string | null,
@@ -12,6 +13,8 @@ export interface Req {
     headerHeight: number | null,
     boxName: string | null,
     boxElem?: number | null,
-    leg?: string | null
-    dependencies: Dependency[]
+    leg?: string | null,
+    frame?: string | null,
+    dependencies: Dependency[],
+    prevDependencies: Dependency[],
 }

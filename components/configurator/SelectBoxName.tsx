@@ -7,7 +7,7 @@ import Option from "./Option";
 
 interface Props {
   req: Req;
-  handleBoxName: (value: string) => void;
+  handleBoxName: (product: Product) => void;
 }
 
 export default function SelectHeaderName({ req, handleBoxName }: Props) {
@@ -25,9 +25,9 @@ export default function SelectHeaderName({ req, handleBoxName }: Props) {
   }, [req.size, req.gr]);
 
 
-  const handleOption = (product: Product, productKey: string) => {
-    handleBoxName(product[productKey as keyof Product] as string);
-  };
+  const handleOption = (product: Product, productKey:  string) => {
+      handleBoxName(product)
+  }
 
   return (
     <div>
