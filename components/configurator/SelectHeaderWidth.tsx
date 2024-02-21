@@ -3,11 +3,12 @@ import { Req } from "@/app/interfaces/req";
 import { getData } from "@/app/utils/configurator";
 import React, { useEffect, useState } from "react";
 import H1 from "./H1";
+import Loading from "./Loading";
 import Option from "./Option";
 
 interface Props {
   req: Req;
-  handleHeaderWidth: (value: string) => void;
+  handleHeaderWidth: (value: string, height: number | null | undefined) => void;
 }
 
 export default function SelectHeaderWidth({ req, handleHeaderWidth }: Props) {
@@ -15,6 +16,7 @@ export default function SelectHeaderWidth({ req, handleHeaderWidth }: Props) {
 
   useEffect(() => {
     (async () => {
+      if (req.gr === null || req.headerName === null) return
       const dataFromFile: Product[] = (await getData(
         "header",
         req.gr,
@@ -24,8 +26,12 @@ export default function SelectHeaderWidth({ req, handleHeaderWidth }: Props) {
     })();
   }, [req.size, req.gr, req.headerName]);
 
+  if (req.gr === null || req.headerName === null) return null
+  if (!data) return (<Loading />) 
+  
+  
   const handleOption = (product: Product, productKey: string) => {
-    handleHeaderWidth(product[productKey as keyof Product] as string);
+    handleHeaderWidth(product[productKey as keyof Product] as string, product.height);
   };
 
   return (

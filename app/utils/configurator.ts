@@ -1,7 +1,25 @@
 import { Product } from "../interfaces/api";
 import { Dependency } from "../interfaces/req";
 export async function getData(category: string, cover: string | null, size: number) {
-  if(cover === null) return []
+  
+
+
+  if(cover === null) {
+    try {
+       const res = await fetch(
+        `api/?category=${category}&size=${size}`
+       );
+       const data: Product[] = await res.json();
+       return data
+    } catch (error) {
+      console.log(error)
+      return null
+    }
+  
+  
+  
+  
+  } else {
   try {
     const res = await fetch(
       `api/?category=${category}&size=${size}&cover=${cover}`
@@ -9,7 +27,20 @@ export async function getData(category: string, cover: string | null, size: numb
     const data: Product[] = await res.json();
     return data
   } catch (error) {
+    console.log(`Fetch error: ${error}`);
+    return null
+  }}
+}
+export async function getOne(index: string) {
+  try {
+    const res = await fetch(
+      `api/?id=${index}`
+    );
+    const data: Product | null = await res.json();
+    return data
+  } catch (error) {
     console.log(`Ferch error: ${error}`);
+    return null
   }
 }
 

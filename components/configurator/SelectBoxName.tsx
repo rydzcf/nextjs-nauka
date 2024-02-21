@@ -3,6 +3,7 @@ import { Req } from "@/app/interfaces/req";
 import { getData } from "@/app/utils/configurator";
 import React, { useEffect, useState } from "react";
 import H1 from "./H1";
+import Loading from "./Loading";
 import Option from "./Option";
 
 interface Props {
@@ -15,6 +16,7 @@ export default function SelectHeaderName({ req, handleBoxName }: Props) {
 
   useEffect(() => {
     (async () => {
+      if (req.gr === null) return
       const dataFromFile: Product[] = (await getData(
         "bed",
         req.gr,
@@ -24,6 +26,8 @@ export default function SelectHeaderName({ req, handleBoxName }: Props) {
     })();
   }, [req.size, req.gr]);
 
+  if (req.gr === null) return null
+  if (!data) return (<Loading />) 
 
   const handleOption = (product: Product, productKey:  string) => {
       handleBoxName(product)
