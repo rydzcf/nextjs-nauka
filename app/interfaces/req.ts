@@ -12,7 +12,7 @@ export interface Req {
     headerWidth: string | null,
     headerHeight: number | null,
     boxName: string | null,
-    boxElem?: number | null,
+    boxIndex: string | null,
     leg?: string | null,
     frame?: string | null,
     dependencies: Dependency[],

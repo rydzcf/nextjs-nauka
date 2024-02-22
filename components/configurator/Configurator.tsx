@@ -26,7 +26,7 @@ const [req, setReq] = useState<Req>(
         headerWidth: null,
         headerHeight: null,
         boxName: null,
-        boxElem: null,
+        boxIndex: null,
         dependencies: [],
         prevDependencies: [],
     }
@@ -39,6 +39,7 @@ useEffect(() => {
         headerWidth: null,
         headerHeight: null,
         boxName: null,
+        boxIndex: null,
     }));
 }, [req.size, req.gr]);
 
@@ -77,13 +78,6 @@ const handleHeaderWidth = (headerWidth: string, headerHeight: number | null | un
         ...(headerHeight ? { headerHeight } : {}),
     });
 };
-// const handleHeaderWidth = (headerWidth: string, headerHeight: number | null | undefined) => {
-//     setReq({
-//         ...req,
-//         headerWidth,
-//         ...(headerHeight ? { headerHeight } : {}),
-//     });
-// };
 
 const handleSetHeaderHeight = (headerHeight : number) => {
     setReq({
@@ -94,7 +88,11 @@ const handleSetHeaderHeight = (headerHeight : number) => {
 
 const handleBoxName = (product: Product) => {
     const updatedReq = updateDependencies(req, product, "boxName");
-    setReq(updatedReq);
+    // setReq(updatedReq);
+    setReq({
+        ...updatedReq,
+        boxIndex: product.index
+    });
   };
 
 const handleLegs = (product: Product) => {

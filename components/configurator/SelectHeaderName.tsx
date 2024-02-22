@@ -30,8 +30,8 @@ export default function SelectHeaderName({ req, handleHeaderName }: Props) {
   if (req.gr === null) return null
   if (!data) return (<Loading />) 
   
-  const handleOption = (product: Product, productKey: string) => {
-    handleHeaderName(product[productKey as keyof Product] as string);
+  const handleOption = (product: Product) => {
+    handleHeaderName(product.name);
   };
 
   return (
@@ -46,7 +46,7 @@ export default function SelectHeaderName({ req, handleHeaderName }: Props) {
           {product && (
             <Option
               product={product}
-              productKey="name"
+              visibleName={product.name}
               handleSelected={handleOption}
               {...(req.headerName === product.name && { active: true })}
             />

@@ -27,7 +27,7 @@ export default function SelectLegs({req, handleLegs} : Props) {
   if (req.boxName === null || !("leg" in req)) return null
   if (!data) return (<Loading />) 
 
-  const handleOption = (product: Product, productKey:  string) => {
+  const handleOption = (product: Product) => {
     handleLegs(product)
 }
 
@@ -43,7 +43,7 @@ export default function SelectLegs({req, handleLegs} : Props) {
                 <Option
             key={product.index}
               product={product}
-              productKey="index"
+              visibleName={product.name}
               handleSelected={handleOption}
               {...(req.leg === product.index && { active: true })}
             />

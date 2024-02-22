@@ -13,6 +13,7 @@ interface Props {
 
 export default function SelectHeaderName({ req, handleBoxName }: Props) {
   const [data, setData] = useState<Product[] | null>(null);
+  const [boxIndex, setBoxIndex] = useState<String | null>(null);
 
   useEffect(() => {
     (async () => {
@@ -29,11 +30,30 @@ export default function SelectHeaderName({ req, handleBoxName }: Props) {
   if (req.gr === null) return null
   if (!data) return (<Loading />) 
 
-  const handleOption = (product: Product, productKey:  string) => {
+  function findY(index: string): boolean {
+    let indexMinus = index.indexOf("-");
+
+    if (indexMinus === -1) return false
+
+    if ((index.charAt(indexMinus - 1)).toLocaleUpperCase() === "Y") return true
+    else return false
+  }
+
+
+  let filteredData = null;
+  
+  if (data && req.boxName) {
+    filteredData = data.filter(product => product.name === req.boxName)
+  }
+
+
+  const handleOption = (product: Product) => {
       handleBoxName(product)
   }
 
+
   return (
+    <>
     <div>
         <H1>Wybierz box</H1>
     <div className="flex space-x-1">
@@ -45,16 +65,36 @@ export default function SelectHeaderName({ req, handleBoxName }: Props) {
           {product && (
             <Option
               product={product}
-              productKey="name"
+              visibleName={product.name}
               handleSelected={handleOption}
               {...(req.boxName === product.name && { active: true })}
             />
           )}
-        </div>
-        
+        </div>    
       );
     })}
+
 </div>
 </div>
+<div>
+    {filteredData && (req.boxName && filteredData?.length > 1) && (
+      <>
+    <H1>Z ilu elementów ma składać się box</H1>
+    <div className="flex space-x-1">
+    {filteredData?.map(product => (
+      <div key={product.index}>
+      <Option
+      product={product}
+      visibleName={(findY(product.index) ? "2" : "1")}
+      handleSelected={handleOption}
+      {...(req.boxIndex === product.index && { active: true })}
+      />
+      </div>
+    ))}
+    </div>
+    </>
+)}
+</div>
+</>
   );
 }

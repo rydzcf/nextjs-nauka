@@ -3,16 +3,16 @@ import React from 'react'
 
 interface Props {
     product: Product,
-    productKey: "name" | "index",
+    visibleName: string
     active?: boolean,
-    handleSelected : (product: Product, productKey: string) => void
+    handleSelected : (product: Product) => void
 }
 
-export default function Option({product, active, productKey, handleSelected}: Props) {
+export default function Option({product, active, visibleName, handleSelected}: Props) {
   return (
-    <div className={`flex justify-center items-center w-20 h-10 border rounded-md mr-1 text-sm cursor-pointer ${active && "bg-red-500"}`}
-    onClick={() => handleSelected(product, productKey)}>
-      {product[productKey]}
+    <div className={`flex justify-center items-center w-28 text-center h-10 border rounded-md mr-1 text-sm cursor-pointer ${active && "bg-red-500"}`}
+    onClick={() => handleSelected(product)}>
+      {visibleName}
       </div>
   )
 }

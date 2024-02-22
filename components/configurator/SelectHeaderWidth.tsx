@@ -4,7 +4,7 @@ import { getData } from "@/app/utils/configurator";
 import React, { useEffect, useState } from "react";
 import H1 from "./H1";
 import Loading from "./Loading";
-import Option from "./Option1";
+import Option from "./Option";
 
 interface Props {
   req: Req;
@@ -50,7 +50,7 @@ export default function SelectHeaderWidth({ req, handleHeaderWidth }: Props) {
           {product && (
             <Option
               product={product}
-              visibleName={(Number(product.index.slice(-3))-req.size)/2 + " cm"}
+              visibleName={(Number(product.index.slice(-3))-1-req.size)/2 + " cm"}
               handleSelected={handleOption}
               {...(req.headerWidth === product.index && { active: true })}
             />
