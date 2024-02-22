@@ -64,6 +64,8 @@ const handleTex = (tex: string | null) => {
 const handleHeaderName =(headerName : string) => {
     setReq({
         ...req,
+        headerHeight: null,
+        headerWidth: null,
         headerName: headerName,
     })
 }
@@ -75,6 +77,13 @@ const handleHeaderWidth = (headerWidth: string, headerHeight: number | null | un
         ...(headerHeight ? { headerHeight } : {}),
     });
 };
+// const handleHeaderWidth = (headerWidth: string, headerHeight: number | null | undefined) => {
+//     setReq({
+//         ...req,
+//         headerWidth,
+//         ...(headerHeight ? { headerHeight } : {}),
+//     });
+// };
 
 const handleSetHeaderHeight = (headerHeight : number) => {
     setReq({

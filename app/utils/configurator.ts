@@ -46,6 +46,10 @@ export async function getOne(index: string) {
 
 
 export function updateDependencies(req: any, product: Product, name: string) {
+  
+  //podwojne klikniecie w ten sam wybor
+  if(req[name] === product.name) return {...req}
+  
   const { dependencies } = req;
   const filteredDependencies = dependencies.filter((dep: Dependency) => dep.parent !== name);
   const newDependencies = product.addons ? product.addons.map(addon => ({ parent: name, child: addon })) : [];
@@ -59,7 +63,7 @@ export function updateDependencies(req: any, product: Product, name: string) {
   // Aktualizujemy 'req' z nową nazwą, poprzednimi i aktualnymi zależnościami
   return {
     ...req,
-    boxName: product.name,
+    [name]: product.name,
     prevDependencies: [...dependencies],
     dependencies: [...filteredDependencies, ...newDependencies]
   };

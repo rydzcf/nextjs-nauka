@@ -4,7 +4,7 @@ import { getData } from "@/app/utils/configurator";
 import React, { useEffect, useState } from "react";
 import H1 from "./H1";
 import Loading from "./Loading";
-import Option from "./Option";
+import Option from "./Option1";
 
 interface Props {
   req: Req;
@@ -30,13 +30,16 @@ export default function SelectHeaderWidth({ req, handleHeaderWidth }: Props) {
   if (!data) return (<Loading />) 
   
   
-  const handleOption = (product: Product, productKey: string) => {
-    handleHeaderWidth(product[productKey as keyof Product] as string, product.height);
+  // const handleOption = (product: Product, productKey: string) => {
+  //   handleHeaderWidth(product[productKey as keyof Product] as string, product.height);
+  // };
+  const handleOption = (product: Product) => {
+    handleHeaderWidth(product.index, product.height);
   };
 
   return (
     <div>
-<H1>Wybierz szerokość</H1>
+<H1>Ile zagłówek ma wystawać poza korpus?</H1>
     
     <div className="flex space-x-1">
   {data && Array.from(new Set(data.map((product) => product.index))) // Tworzenie unikalnych nazw produktów
@@ -47,10 +50,16 @@ export default function SelectHeaderWidth({ req, handleHeaderWidth }: Props) {
           {product && (
             <Option
               product={product}
-              productKey="index"
+              visibleName={(Number(product.index.slice(-3))-req.size)/2 + " cm"}
               handleSelected={handleOption}
               {...(req.headerWidth === product.index && { active: true })}
             />
+            // <Option
+            //   product={product}
+            //   productKey="index"
+            //   handleSelected={handleOption}
+            //   {...(req.headerWidth === product.index && { active: true })}
+            // />
           )}
         </div>
       );
