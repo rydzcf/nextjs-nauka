@@ -26,15 +26,15 @@ export default function SelectTex({ handleTex }: Prop) {
   };
 
   return (
-    <label>
-      <H1>Wpisz numer tkaniny</H1>
-      <input
-        type="text"
-        value={tex}
-        name="tex"
-        className={`text-black w-24 mx-1 py-1 px-2 border-2 rounded-md ${isValid ? "border-lime-700" : "border-red-700"}`}
-        onChange={handleChange}
-        maxLength={5}></input>
-    </label>
+    <label className="flex items-center mt-10 mb-5">
+    <H1 className="flex mt-0 mb-0">Wpisz numer tkaniny</H1>
+    <input
+      type="text"
+      value={tex}
+      name="tex"
+      className={`flex ml-2 bg-transparent w-20 border-white py-1 px-2 border-b text-xl ${isValid ? 'text-green-700' : 'text-red-700'} focus:outline-none`}
+      onChange={handleChange}
+      maxLength={5} />
+</label>
   );
 }

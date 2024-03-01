@@ -4,8 +4,11 @@ export interface Product {
     photo?: string;
     price: number;
     size: number;
-    height?: number;
+    height?: number | string;
     index: string;
     addons?: string[],
     fit?: string[],
+    spring?: string | null,
+    h?: string | null,
+    build?: string | null
   }

@@ -2,8 +2,6 @@ import { Product } from "../interfaces/api";
 import { Dependency } from "../interfaces/req";
 export async function getData(category: string, cover: string | null, size: number) {
   
-
-
   if(cover === null) {
     try {
        const res = await fetch(
@@ -16,16 +14,13 @@ export async function getData(category: string, cover: string | null, size: numb
       return null
     }
   
-  
-  
-  
   } else {
   try {
     const res = await fetch(
       `api/?category=${category}&size=${size}&cover=${cover}`
     );
     const data: Product[] = await res.json();
-    return data
+    return data.sort((a: Product, b: Product) => a.name.localeCompare(b.name))
   } catch (error) {
     console.log(`Fetch error: ${error}`);
     return null

@@ -34,7 +34,7 @@ export default function SelectHeaderWidth({ req, handleHeaderWidth }: Props) {
   //   handleHeaderWidth(product[productKey as keyof Product] as string, product.height);
   // };
   const handleOption = (product: Product) => {
-    handleHeaderWidth(product.index, product.height);
+    handleHeaderWidth(product.index, Number(product.height));
   };
 
   return (
@@ -43,6 +43,7 @@ export default function SelectHeaderWidth({ req, handleHeaderWidth }: Props) {
     
     <div className="flex space-x-1">
   {data && Array.from(new Set(data.map((product) => product.index))) // Tworzenie unikalnych nazw produktów
+    .sort((a: string, b: string) => a.localeCompare(b))
     .map((uniqueName) => {
       const product = data.find((product) => product.index === uniqueName); // Znalezienie pierwszego produktu z unikalną nazwą
       return (

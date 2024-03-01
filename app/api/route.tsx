@@ -82,6 +82,15 @@ export function GET(request: NextRequest) {
         "addons": ["leg"]
       },
     {
+        "name": "BOX1",
+        "category": "bed",
+        "photo": "sl03-p.jpg",
+        "price": 99999,
+        "size": 160,
+        "index": "BOX1-2-1620",
+        "addons": ["leg"]
+      },
+    {
         "name": "BOX2",
         "category": "bed",
         "photo": "sl03-p.jpg",
@@ -114,7 +123,7 @@ export function GET(request: NextRequest) {
         "photo": "sl03-p.jpg",
         "price": 9999,
         "size": 160,
-        "index": "NOG-1",
+        "index": "INDEKS-NOG-1",
         "fit" : ["BOX3", "BOX1"]
       },
     {
@@ -123,8 +132,36 @@ export function GET(request: NextRequest) {
         "photo": "sl03-p.jpg",
         "price": 9999,
         "size": 160,
-        "index": "NOG do wszy",
+        "index": "INDEKS-NOG do wszy",
         "fit" : []
+      },
+
+    {
+        "name": "Materac Cano",
+        "category": "mattress",
+        "photo": "sl03-p.jpg",
+        "price": 9999,
+        "size": 160,
+        "index": "CANO-H2-1-213",
+        "spring": "1000S"
+      },
+    {
+        "name": "Materac Cano",
+        "category": "mattress",
+        "photo": "sl03-p.jpg",
+        "price": 9999,
+        "size": 160,
+        "index": "CANO-H3-1-213",
+        "spring": "1000S"
+      },
+    {
+        "name": "Materac Pinta",
+        "category": "mattress",
+        "photo": "sl03-p.jpg",
+        "price": 9999,
+        "size": 160,
+        "index": "Pinta-H3-1-213",
+        "spring": "TFK"
       }
     ]
 

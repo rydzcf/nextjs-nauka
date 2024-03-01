@@ -35,7 +35,7 @@ export default function SelectHeaderName({ req, handleHeaderName }: Props) {
   };
 
   return (
-    <div>
+    <>
         <H1>Wybierz zagłówek</H1>
     <div className="flex space-x-1">
   {data && Array.from(new Set(data.map((product) => product.name))) // Tworzenie unikalnych nazw produktów
@@ -56,6 +56,6 @@ export default function SelectHeaderName({ req, handleHeaderName }: Props) {
       );
     })}
 </div>
-</div>
+</>
   );
 }

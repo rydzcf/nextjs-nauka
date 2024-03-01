@@ -13,7 +13,7 @@ interface Props {
 
 export default function SelectHeaderName({ req, handleBoxName }: Props) {
   const [data, setData] = useState<Product[] | null>(null);
-  const [boxIndex, setBoxIndex] = useState<String | null>(null);
+  
 
   useEffect(() => {
     (async () => {
@@ -81,7 +81,7 @@ export default function SelectHeaderName({ req, handleBoxName }: Props) {
       <>
     <H1>Z ilu elementów ma składać się box</H1>
     <div className="flex space-x-1">
-    {filteredData?.map(product => (
+    {filteredData?.sort((a: Product, b: Product) => a.index.localeCompare(b.index)).map(product => (
       <div key={product.index}>
       <Option
       product={product}
