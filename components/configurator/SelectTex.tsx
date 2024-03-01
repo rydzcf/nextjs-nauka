@@ -26,7 +26,7 @@ export default function SelectTex({ handleTex }: Prop) {
   };
 
   return (
-    <label className="flex items-center mt-10 mb-5">
+    <label className="flex items-center mt-10">
     <H1 className="flex mt-0 mb-0">Wpisz numer tkaniny</H1>
     <input
       type="text"

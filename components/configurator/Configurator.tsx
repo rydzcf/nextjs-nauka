@@ -11,8 +11,7 @@ import SelectHeaderWidth from "./SelectHeaderWidth";
 import SelectBoxName from "./SelectBoxName";
 import SelectLegs from "./SelectLegs";
 import Summary from "./Summary";
-import SelectMatSpring from "./SelectMatSpring";
-import SelectMatBuild from "./SelectMatBuild";
+import SelectMat from "./SelectMat";
 
 export default function Configurator() {
   const [req, setReq] = useState<Req>({
@@ -26,7 +25,6 @@ export default function Configurator() {
     boxName: null,
     boxIndex: null,
     matSpring: null,
-    matH: null,
     matBuild: null,
     pillHeight: null,
     pillBuild: null,
@@ -45,7 +43,6 @@ export default function Configurator() {
       boxName: null,
       boxIndex: null,
       matSpring: null,
-      matH: null,
       matBuild: null,
       pillHeight: null,
       pillBuild: null,
@@ -115,9 +112,33 @@ export default function Configurator() {
   };
 
   const handleMatSpring = (matSpring: string | null) => {
+    //dodaje do obiektu req klucz matH ale tylko wtedy kiedy wybierzemy sprezyne TFK, bo tylko ona ma wtwardosc
+    if(matSpring === "TFK") {
+        setReq({        
+            ...req,
+            matH: null,
+            matSpring
+        })
+    } else {
+        const { matH, ...rest } = req;
+        setReq({        
+        ...rest,
+        matSpring
+    })
+    }
+  }
+
+  const handleMatH = (matH: Req['matH'] ) => {
     setReq({
         ...req,
-        matSpring
+        matH
+    })
+  }
+
+  const handleMatBuild = (matBuild: Req['matBuild'] ) => {
+    setReq({
+        ...req,
+        matBuild
     })
   }
   return (
@@ -132,8 +153,7 @@ export default function Configurator() {
       />
       <SelectBoxName req={req} handleBoxName={handleBoxName} />
       <SelectLegs req={req} handleLegs={handleLegs} />
-      <SelectMatSpring req={req} setMatSpring={handleMatSpring}/>
-      <SelectMatBuild />
+      <SelectMat req={req} setMatSpring={handleMatSpring} setMatH={handleMatH} setMatBuild={handleMatBuild}/>
       <Summary req={req} />
     </div>
   );

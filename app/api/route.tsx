@@ -143,16 +143,8 @@ export function GET(request: NextRequest) {
         "price": 9999,
         "size": 160,
         "index": "CANO-H2-1-213",
-        "spring": "1000S"
-      },
-    {
-        "name": "Materac Cano",
-        "category": "mattress",
-        "photo": "sl03-p.jpg",
-        "price": 9999,
-        "size": 160,
-        "index": "CANO-H3-1-213",
-        "spring": "1000S"
+        "spring": "1000S",
+        "build": "2S2"
       },
     {
         "name": "Materac Pinta",
@@ -161,7 +153,39 @@ export function GET(request: NextRequest) {
         "price": 9999,
         "size": 160,
         "index": "Pinta-H3-1-213",
-        "spring": "TFK"
+        "spring": "TFK",
+        "build": "2S2"
+      },
+    {
+        "name": "Materac Pinta",
+        "category": "mattress",
+        "photo": "sl03-p.jpg",
+        "price": 9999,
+        "size": 160,
+        "index": "Pinta-H3-1-213",
+        "spring": "TFK",
+        "h": "H3",
+        "build": "2S4"
+      },
+    {
+        "name": "Materac Pinta",
+        "category": "mattress",
+        "photo": "sl03-p.jpg",
+        "price": 9999,
+        "size": 160,
+        "index": "Pinta-H3-1-213",
+        "spring": "TFK",
+        "build": "2S41"
+      },
+    {
+        "name": "Materac Pinta",
+        "category": "mattress",
+        "photo": "sl03-p.jpg",
+        "price": 9999,
+        "size": 160,
+        "index": "Pinta-H2-1-213",
+        "spring": "TFK",
+        "h": "H2"
       }
     ]
 

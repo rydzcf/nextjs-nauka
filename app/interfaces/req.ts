@@ -17,7 +17,7 @@ export interface Req {
     leg?: string | null,
     frame?: string | null,
     matSpring: string | null,
-    matH: "H1" | "H2" | "H3" | "H4" | null,
+    matH?: "H1" | "H2" | "H3" | "H4" | null,
     matBuild: "2S" | "2S4" | "2K" | "2K4" | "2X" | "2X4" | "2F" | "2F4" | "TH1" | "TH2" | null,
     pillHeight: "Standard" | "Max" | "Super" | null,
     pillBuild: "N" | "S" | "E" | "B" | "V" | "A" | "M" | "TH1" | null,

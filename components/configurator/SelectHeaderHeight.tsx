@@ -16,7 +16,7 @@ export default function SelectHeaderHeight({ headerHeightCustom, setHeaderHeight
   
 
   return (
-    <div className="flex items-center mt-10 mb-5">
+    <div className="flex items-center mt-10">
     <H1 className="flex mt-0 mb-0">Podaj wysokość zagłówka</H1>
     <label className="flex items-center">
     <input
