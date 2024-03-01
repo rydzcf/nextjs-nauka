@@ -102,8 +102,8 @@ const handleLegs = (product: Product) => {
     })
 }  
     return (
-    <div>
-        <SelectSize handleSize={handleSize}/>
+    <div className='container mx-auto py-5'>
+        <SelectSize handleSize={handleSize} selectedSize={req.size}/>
         <SelectTex handleTex={handleTex} />
         <SelectHeaderName req={req} handleHeaderName={handleHeaderName}/>
         <SelectHeaderWidth req={req} handleHeaderWidth={handleHeaderWidth}/>
