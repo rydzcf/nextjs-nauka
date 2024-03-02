@@ -14,6 +14,7 @@ export interface Req {
     headerHeightCustom: number | null,
     boxName: string | null,
     boxIndex: string | null,
+    legs?: string | null,
     leg?: string | null,
     frame?: string | null,
     matSpring: string | null,

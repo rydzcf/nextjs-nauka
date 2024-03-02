@@ -111,7 +111,7 @@ export default function Configurator() {
   const handleLegs = (product: Product) => {
     setReq({
       ...req,
-      leg: product.index,
+      legs: product.index,
     });
   };
 

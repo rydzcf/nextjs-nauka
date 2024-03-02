@@ -15,16 +15,16 @@ export default function SelectLegs({req, handleLegs} : Props) {
 
   useEffect(() => {
     (async () => {
-      if (req.boxName === null || !("leg" in req)) return
+      if (req.boxName === null || !("legs" in req)) return
       const dataFromFile: Product[] = (await getData(
-        "leg",
+        "legs",
         null,
         req.size
       )) as Product[];
       setData(dataFromFile);
     })();
   }, [req.size, req.boxName]);
-  if (req.boxName === null || !("leg" in req)) return null
+  if (req.boxName === null || !("legs" in req)) return null
   if (!data) return (<Loading />) 
 
   const handleOption = (product: Product) => {
@@ -45,7 +45,7 @@ export default function SelectLegs({req, handleLegs} : Props) {
               product={product}
               visibleName={product.name}
               handleSelected={handleOption}
-              {...(req.leg === product.index && { active: true })}
+              {...(req.legs === product.index && { active: true })}
             />
             )
         })}

@@ -79,7 +79,7 @@ export function GET(request: NextRequest) {
         "price": 99999,
         "size": 160,
         "index": "BOX1-1-1620",
-        "addons": ["leg"]
+        "addons": ["legs"]
       },
     {
         "name": "BOX1",
@@ -88,7 +88,7 @@ export function GET(request: NextRequest) {
         "price": 99999,
         "size": 160,
         "index": "BOX1-2-1620",
-        "addons": ["leg"]
+        "addons": ["legs"]
       },
     {
         "name": "BOX2",
@@ -97,7 +97,7 @@ export function GET(request: NextRequest) {
         "price": 99999,
         "size": 160,
         "index": "BOX2-1-1620",
-        "addons": ["leg", "frame"]
+        "addons": ["legs", "frame"]
       },
     {
         "name": "BOX3",
@@ -119,7 +119,7 @@ export function GET(request: NextRequest) {
 
     {
         "name": "noga do BOX3 i Box1",
-        "category": "leg",
+        "category": "legs",
         "photo": "sl03-p.jpg",
         "price": 9999,
         "size": 160,
@@ -128,12 +128,22 @@ export function GET(request: NextRequest) {
       },
     {
         "name": "noga do wszytkiego",
-        "category": "leg",
+        "category": "legs",
         "photo": "sl03-p.jpg",
         "price": 9999,
         "size": 160,
         "index": "INDEKS-NOG do wszy",
         "fit" : []
+      },
+    {
+        "name": "zestaw kilku nog",
+        "category": "legs",
+        "photo": "sl03-p.jpg",
+        "price": 9999,
+        "size": 160,
+        "index": "ZESTAW-KILKU-NOG",
+        "fit" : ["BOX1"],
+        "addons" : ["leg"]
       },
 
     {
