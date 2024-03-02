@@ -38,7 +38,7 @@ export default function SelectHeaderWidth({ req, handleHeaderWidth }: Props) {
   };
 
   return (
-    <div>
+    <>
 <H1>Ile zagłówek ma wystawać poza korpus?</H1>
     
     <div className="flex space-x-1">
@@ -55,17 +55,11 @@ export default function SelectHeaderWidth({ req, handleHeaderWidth }: Props) {
               handleSelected={handleOption}
               {...(req.headerWidth === product.index && { active: true })}
             />
-            // <Option
-            //   product={product}
-            //   productKey="index"
-            //   handleSelected={handleOption}
-            //   {...(req.headerWidth === product.index && { active: true })}
-            // />
           )}
         </div>
       );
     })}
 </div>
-</div>
+</>
   );
 }

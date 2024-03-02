@@ -35,7 +35,9 @@ export default function Configurator() {
   //zerowanie wyborów przy zmianie size albo gr
   useEffect(() => {
     setReq((req) => ({
-      ...req,
+        tex: req.tex,
+        size: req.size,
+        gr: req.gr,
       headerName: null,
       headerWidth: null,
       headerHeight: null,
@@ -47,6 +49,8 @@ export default function Configurator() {
       pillHeight: null,
       pillBuild: null,
       pillCover: null,
+      dependencies: [],
+      prevDependencies: []
     }));
   }, [req.size, req.gr]);
 
@@ -117,12 +121,14 @@ export default function Configurator() {
         setReq({        
             ...req,
             matH: null,
+            matBuild: null,
             matSpring
         })
     } else {
         const { matH, ...rest } = req;
         setReq({        
         ...rest,
+        matBuild: null,
         matSpring
     })
     }
@@ -131,7 +137,8 @@ export default function Configurator() {
   const handleMatH = (matH: Req['matH'] ) => {
     setReq({
         ...req,
-        matH
+        matH,
+        matBuild: null
     })
   }
 
@@ -142,7 +149,7 @@ export default function Configurator() {
     })
   }
   return (
-    <div className="container mx-auto py-5">
+    <div className="container mx-auto py-5 flex flex-col items-center">
       <SelectSize handleSize={handleSize} selectedSize={req.size} />
       <SelectTex handleTex={handleTex} />
       <SelectHeaderName req={req} handleHeaderName={handleHeaderName} />

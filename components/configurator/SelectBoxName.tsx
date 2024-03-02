@@ -54,7 +54,6 @@ export default function SelectHeaderName({ req, handleBoxName }: Props) {
 
   return (
     <>
-    <div>
         <H1>Wybierz box</H1>
     <div className="flex space-x-1">
   {data && Array.from(new Set(data.map((product) => product.name))) // Tworzenie unikalnych nazw produktów
@@ -75,8 +74,9 @@ export default function SelectHeaderName({ req, handleBoxName }: Props) {
     })}
 
 </div>
-</div>
-<div>
+
+
+
     {filteredData && (req.boxName && filteredData?.length > 1) && (
       <>
     <H1>Z ilu elementów ma składać się box</H1>
@@ -94,7 +94,6 @@ export default function SelectHeaderName({ req, handleBoxName }: Props) {
     </div>
     </>
 )}
-</div>
 </>
   );
 }
