@@ -118,8 +118,8 @@ export default function SelectMat({ req, setMatSpring, setMatH, setMatBuild }: P
                 <Option
                   product={product}
                   visibleName={build ?? ""}
-                  handleSelected={() => setMatBuild(build as Req['matBuild'] ?? null)}
-                  {...(req.matBuild === build && { active: true })}
+                  handleSelected={() => setMatBuild(JSON.stringify(product) as Req['matBuild'] ?? null)}
+                  {...(req.matBuild === JSON.stringify(product) && { active: true })}
                 />
               )}
             </div>

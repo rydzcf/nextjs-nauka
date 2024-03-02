@@ -34,7 +34,9 @@ export default function SelectHeaderWidth({ req, handleHeaderWidth }: Props) {
   //   handleHeaderWidth(product[productKey as keyof Product] as string, product.height);
   // };
   const handleOption = (product: Product) => {
-    handleHeaderWidth(product.index, Number(product.height));
+    // handleHeaderWidth(product.index, Number(product.height));
+     handleHeaderWidth(JSON.stringify(product), Number(product.height));
+
   };
 
   return (
@@ -53,7 +55,7 @@ export default function SelectHeaderWidth({ req, handleHeaderWidth }: Props) {
               product={product}
               visibleName={(Number(product.index.slice(-3))-1-req.size)/2 + " cm"}
               handleSelected={handleOption}
-              {...(req.headerWidth === product.index && { active: true })}
+              {...(req.headerWidth === JSON.stringify(product) && { active: true })}
             />
           )}
         </div>

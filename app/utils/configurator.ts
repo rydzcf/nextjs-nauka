@@ -1,4 +1,4 @@
-import { Product } from "../interfaces/api";
+import { LegsIndex, Product } from "../interfaces/api";
 import { Dependency } from "../interfaces/req";
 export async function getData(category: string, cover: string | null, size: number) {
   
@@ -39,11 +39,27 @@ export async function getOne(index: string) {
   }
 }
 
+export async function getLegsTable(index: string) {
+  const legs: LegsIndex[] = JSON.parse(index)
+  let legsTable: Product[] = []
+  let product: Product | null = null
+  for (const leg of legs) {
+    product = await getOne(leg.id)
+    if(product) {
+      product.index = product.index + " - " + leg.qty;
+      product.price = product.price*leg.qty;
+      legsTable.push(product)
+    }
+  }
+  return legsTable
+}
+
+
 
 export function updateDependencies(req: any, product: Product, name: string) {
   
   //podwojne klikniecie w ten sam wybor
-  if(req[name] === product.name) return {...req}
+  if(req[name] === product.name || req[name] === product.index) return {...req}
   
   const { dependencies } = req;
   const filteredDependencies = dependencies.filter((dep: Dependency) => dep.parent !== name);
@@ -62,4 +78,21 @@ export function updateDependencies(req: any, product: Product, name: string) {
     prevDependencies: [...dependencies],
     dependencies: [...filteredDependencies, ...newDependencies]
   };
+}
+
+
+export function isStringifyObject(str: string | null) {
+  try {
+    // Próba sparsowania ciągu znaków jako JSON
+    if (str === null) return false
+    const obj = JSON.parse(str);
+    // Sprawdzenie, czy wynik jest obiektem i nie jest nullem
+    if (obj && typeof obj === "object") {
+      return true;
+    }
+  } catch (e) {
+    // Przechwycenie wyjątku, jeśli JSON.parse() zgłosi błąd
+    return false;
+  }
+  return false;
 }

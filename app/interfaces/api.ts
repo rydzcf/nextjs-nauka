@@ -12,3 +12,9 @@ export interface Product {
     h?: string | null,
     build?: string | null
   }
+
+
+  export interface LegsIndex {
+    id: string,
+    qty: number
+  }

@@ -101,17 +101,16 @@ export default function Configurator() {
 
   const handleBoxName = (product: Product) => {
     const updatedReq = updateDependencies(req, product, "boxName");
-    // setReq(updatedReq);
     setReq({
       ...updatedReq,
-      boxIndex: product.index,
+      boxIndex: JSON.stringify(product),
     });
   };
 
   const handleLegs = (product: Product) => {
     setReq({
       ...req,
-      legs: product.index,
+      legs: JSON.stringify(product),
     });
   };
 

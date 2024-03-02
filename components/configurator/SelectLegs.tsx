@@ -1,4 +1,4 @@
-import { Product } from '@/app/interfaces/api';
+import { LegsIndex, Product } from '@/app/interfaces/api';
 import { Req } from '@/app/interfaces/req';
 import { getData } from '@/app/utils/configurator';
 import React, { useEffect, useState } from 'react'
@@ -27,6 +27,25 @@ export default function SelectLegs({req, handleLegs} : Props) {
   if (req.boxName === null || !("legs" in req)) return null
   if (!data) return (<Loading />) 
 
+  
+  
+
+  const testIndex: LegsIndex[] = 
+      [
+        {
+        id: "INDEX-ONE-LEG",
+        qty: 2
+      },
+      {
+        id: "INDEX-ONE-LEG",
+        qty: 2
+      }
+    ]
+  
+
+  // console.log((JSON.stringify(testIndex)))
+
+
   const handleOption = (product: Product) => {
     handleLegs(product)
 }
@@ -45,7 +64,7 @@ export default function SelectLegs({req, handleLegs} : Props) {
               product={product}
               visibleName={product.name}
               handleSelected={handleOption}
-              {...(req.legs === product.index && { active: true })}
+              {...(req.legs === JSON.stringify(product) && { active: true })}
             />
             )
         })}
