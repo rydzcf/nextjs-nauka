@@ -141,7 +141,7 @@ export function GET(request: NextRequest) {
         "photo": "sl03-p.jpg",
         "price": 9999,
         "size": 160,
-        "index": "[{\"id\":\"INDEX-ONE-LEG\",\"qty\":2},{\"id\":\"INDEX-ONE-LEG\",\"qty\":2}]",
+        "index": "[{\"id\":\"INDEX-ONE-LEG\",\"qty\":2},{\"id\":\"INDEX-2-LEG\",\"qty\":4}]",
         "fit" : ["BOX1"],
       },
       {
@@ -150,6 +150,13 @@ export function GET(request: NextRequest) {
         "photo": "",
         "price": 1,
         "index": "INDEX-ONE-LEG",
+      },
+      {
+        "name": "noga 1 szt z kompletu ale innego",
+        "category": "leg",
+        "photo": "",
+        "price": 2,
+        "index": "INDEX-2-LEG",
       },
 
     {

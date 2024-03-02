@@ -3,6 +3,7 @@ import { Product } from '@/app/interfaces/api';
 import { getLegsTable, isStringifyObject } from '@/app/utils/configurator'
 import React, { useEffect, useState } from 'react'
 import H1 from './H1'
+import Loading from './Loading';
 
 interface Props {
     req: Req
@@ -72,7 +73,7 @@ export default function Summary({req}: Props) {
            </div>
         </div>
 
-        {!legsTable ? (
+        {(legs && !isStringifyObject(legs.index)) ? (
         <div className="flex">
            <div className="flex-1">
            {legs && legs.name}
@@ -84,18 +85,19 @@ export default function Summary({req}: Props) {
            {legs && legs.price}
            </div>
         </div>
-        ) : (
+        ) :
+        ((legsTable && legs) ? (
           
             legsTable.map(row => {
              
               return (
-             <div className="flex">
+             <div key={row.index} className="flex">
                 <div className="flex-1">{row.name}</div>
                 <div className="flex-1">{row.index}</div>
-                <div className="flex-2">{row.price}</div>
+                <div className="w-20 text-right">{row.price}</div>
               </div>
             )}
-            ))
+            )): legs && <Loading /> )
           
         }
 
@@ -113,5 +115,5 @@ export default function Summary({req}: Props) {
         
         
     </div>
-  )
+  ) 
 }
