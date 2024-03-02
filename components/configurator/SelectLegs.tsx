@@ -16,6 +16,7 @@ export default function SelectLegs({req, handleLegs} : Props) {
   useEffect(() => {
     (async () => {
       if (req.boxName === null || !("legs" in req)) return
+      
       const dataFromFile: Product[] = (await getData(
         "legs",
         null,
