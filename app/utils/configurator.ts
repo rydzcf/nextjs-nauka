@@ -46,14 +46,44 @@ export async function getLegsTable(index: string) {
   for (const leg of legs) {
     product = await getOne(leg.id)
     if(product) {
-      product.index = product.index + " - " + leg.qty;
+      product.index = product.index + " - " + leg.qty + " szt";
       product.price = product.price*leg.qty;
       legsTable.push(product)
+      // console.log(product)
+    }
+    else {
+      // const emptyProduct:Product = {
+      //   name: "",
+      //   category: "leg",
+      //   price: 99999,
+      //   index: leg.id
+      // }
+
+      // legs.push(emptyProduct)
     }
   }
   return legsTable
 }
 
+
+export function pricify(number: number) {
+  if (!isNaN(Number(number))) {
+    return Math.ceil(number).toLocaleString("fr-FR").replace(/,/g, " ") + " PLN";
+  }
+  return "- zł";
+}
+
+// export function finalPrice(cart) {
+//   return cart.reduce((total, item) => {
+//     // Konwersja ceny na liczbę i sprawdzenie, czy jest to poprawna liczba
+//     if (!isNaN(Number(item.price))) {
+//       // Dodawanie skonwertowanej wartości ceny do łącznej sumy
+//       return total + Number(item.price);
+//     }
+//     // Jeśli cena nie jest liczbą, kontynuuj z dotychczasową sumą
+//     return total;
+//   }, 0); // Początkowa wartość sumy to 0
+// }
 
 
 export function updateDependencies(req: any, product: Product, name: string) {

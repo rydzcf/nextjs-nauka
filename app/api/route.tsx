@@ -22,7 +22,7 @@ export function GET(request: NextRequest) {
         "name": "Z01",
         "category": "header",
         "photo": "sl03-p.jpg",
-        "price": 99999,
+        "price": 100,
         "size": 160,
         "height": 116,
         "index": "Z01-1-16S181"
@@ -91,6 +91,15 @@ export function GET(request: NextRequest) {
         "addons": ["legs"]
       },
     {
+        "name": "BTFK",
+        "category": "bed",
+        "photo": "sl03-p.jpg",
+        "price": 99999,
+        "size": 160,
+        "index": "BTFK-1-1620",
+        "addons": ["legs"]
+      },
+    {
         "name": "BOX2",
         "category": "bed",
         "photo": "sl03-p.jpg",
@@ -127,6 +136,33 @@ export function GET(request: NextRequest) {
         "fit" : ["BOX3", "BOX1"]
       },
     {
+        "name": "Nogi metalowe 18cm czarne",
+        "category": "legs",
+        "photo": "sl03-p.jpg",
+        "price": 9999,
+        "size": 160,
+        "index": "ZNOG01-ZD-BTFK-H18-CZ",
+        "fit" : ["BTFK"]
+      },
+    {
+        "name": "Nogi metalowe 18cm srebrne",
+        "category": "legs",
+        "photo": "sl03-p.jpg",
+        "price": 9999,
+        "size": 160,
+        "index": "ZNOG01-ZD-BTFK-H18-SR",
+        "fit" : ["BTFK"]
+      },
+      {
+        "name": "Nogi drewniane 12cm czarne",
+        "category": "legs",
+        "photo": "sl03-p.jpg",
+        "price": 9999,
+        "size": 160,
+        "index": "[{\"id\":\"NOG-DRE-WAL-CZ-8x8x12\",\"qty\":6},{\"id\":\"NOG-WEW-12\",\"qty\":2}]",
+        "fit" : ["BTFK"],
+      },
+    {
         "name": "noga do wszytkiego",
         "category": "legs",
         "photo": "sl03-p.jpg",
@@ -143,6 +179,20 @@ export function GET(request: NextRequest) {
         "size": 160,
         "index": "[{\"id\":\"INDEX-ONE-LEG\",\"qty\":2},{\"id\":\"INDEX-2-LEG\",\"qty\":4}]",
         "fit" : ["BOX1"],
+      },
+      {
+        "name": "Noga wewnętrzna 12cm",
+        "category": "leg",
+        "photo": "",
+        "price": 1,
+        "index": "NOG-WEW-12a",
+      },
+      {
+        "name": "Noga drewniana czarna 12cm",
+        "category": "leg",
+        "photo": "",
+        "price": 10,
+        "index": "NOG-DRE-WAL-CZ-8x8x12",
       },
       {
         "name": "noga 1 szt z kompletu",

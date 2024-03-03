@@ -1,6 +1,6 @@
 import { Req } from '@/app/interfaces/req'
 import { Product } from '@/app/interfaces/api';
-import { getLegsTable, isStringifyObject } from '@/app/utils/configurator'
+import { getLegsTable, isStringifyObject, pricify } from '@/app/utils/configurator'
 import React, { useEffect, useState } from 'react'
 import H1 from './H1'
 import Loading from './Loading';
@@ -38,6 +38,29 @@ export default function Summary({req}: Props) {
   }
   if(isStringifyObject(req.headerWidth)){
     header = JSON.parse(req.headerWidth as string)
+    let defaultPrice = 99999;
+    if (header?.price) defaultPrice=header.price;
+    let newPrice = 0
+    if(header && header.price && header?.height && req.headerHeightCustom) 
+    if(header.height > req.headerHeightCustom) {
+      // zaglowek niższy doliczamy 10% za przeróbkę 
+      newPrice = defaultPrice * 1.1
+    } else {
+      // doliczamy + 10% za przeróbkę i + 20% za każde rozczpoczęte 20cm
+      newPrice = defaultPrice * 1.1 * (1+ Math.ceil((req.headerHeightCustom - Number(header.height))/20)*0.2)
+    }
+  
+
+    if (header && header?.height !== req.headerHeightCustom)
+    {
+     header = {
+      ...header,
+      index: header.index + "W" + req.headerHeightCustom,
+
+      price: newPrice
+    }
+
+    }
   }
   if(req.legs && isStringifyObject(req.legs)){
     legs = JSON.parse(req.legs as string)
@@ -57,8 +80,8 @@ export default function Summary({req}: Props) {
            <div className="flex-1">
           {header && header.index}
            </div>
-           <div className="w-20 text-right">
-           {header && header.price}
+           <div className="w-24 text-right">
+           {header && pricify(header.price)}
            </div>
         </div>
         <div className="flex">
@@ -68,8 +91,8 @@ export default function Summary({req}: Props) {
            <div className="flex-1">
           {box && box.index} 
            </div>
-           <div className="w-20 text-right">
-           {box && box.price}
+           <div className="w-24 text-right">
+           {box && pricify(box.price)}
            </div>
         </div>
 
@@ -81,8 +104,8 @@ export default function Summary({req}: Props) {
            <div className="flex-1">
           {legs && legs.index}
            </div>
-           <div className="w-20 text-right">
-           {legs && legs.price}
+           <div className="w-24 text-right">
+           {legs && pricify(legs.price)}
            </div>
         </div>
         ) :
@@ -94,7 +117,7 @@ export default function Summary({req}: Props) {
              <div key={row.index} className="flex">
                 <div className="flex-1">{row.name}</div>
                 <div className="flex-1">{row.index}</div>
-                <div className="w-20 text-right">{row.price}</div>
+                <div className="w-24 text-right">{pricify(row.price)}</div>
               </div>
             )}
             )): legs && <Loading /> )
@@ -108,8 +131,8 @@ export default function Summary({req}: Props) {
            <div className="flex-1">
           {mattress && mattress.index}
            </div>
-           <div className="w-20 text-right">
-           {mattress && mattress.price}
+           <div className="w-24 text-right">
+           {mattress && pricify(mattress.price)}
            </div>
         </div>
         

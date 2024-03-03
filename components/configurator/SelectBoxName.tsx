@@ -87,7 +87,7 @@ export default function SelectHeaderName({ req, handleBoxName }: Props) {
       product={product}
       visibleName={(findY(product.index) ? "2" : "1")}
       handleSelected={handleOption}
-      {...(req.boxIndex === product.index && { active: true })}
+      {...(req.boxIndex === JSON.stringify(product) && { active: true })}
       />
       </div>
     ))}
