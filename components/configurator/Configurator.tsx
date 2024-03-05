@@ -13,7 +13,8 @@ import SelectLegs from "./SelectLegs";
 import Summary from "./Summary";
 import SelectMat from "./SelectMat";
 import SelectPillowtop from "./SelectPillowtop";
-import Q from "./Q";
+import { Switch } from "../ui/switch";
+import H1 from "./H1";
 
 export default function Configurator() {
   const [isMattrass, setIsMattrass] = useState(false)
@@ -189,7 +190,24 @@ export default function Configurator() {
         headerHeightCustom={req.headerHeightCustom}
         setHeaderHeightCustom={handleSetHeaderHeightCustom}
       />
-      <Q question="Czy chcesz dobrać materac?" handleQuestion={()=>console.log("111")}/>
+      {req.gr ? 
+       <>
+       <H1>Dodatki</H1>
+       <div className="flex space-x-6">
+       <div className="flex items-center space-x-2 my-5">
+        <Switch checked={isMattrass} onCheckedChange={() => {
+          setIsMattrass(!isMattrass)}}/> 
+        <label>materac</label>
+      </div>
+       <div className="flex items-center space-x-2 my-5">
+        <Switch checked={isPillowtop} onCheckedChange={() => {
+          setIsPillowtop(!isPillowtop)}}/> 
+        <label>przekładka</label>
+      </div>
+      </div>
+      </>
+: null}
+
       {isMattrass ?
       <SelectMat req={req} setMatSpring={handleMatSpring} setMatH={handleMatH} setMatBuild={handleMatBuild}/>
       : null}

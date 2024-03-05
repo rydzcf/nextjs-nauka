@@ -16,7 +16,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="pl">
-      <body className={lato.className}>{children}</body>
+      <body className={`${lato.className} dark`}>{children}</body>
     </html>
   );
 }
