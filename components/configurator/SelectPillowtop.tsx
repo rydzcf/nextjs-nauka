@@ -116,59 +116,6 @@ export default function SelectPillowtop({ req, setPillCover, setPillHeight, setP
         })}
       </div>
    
-   {/*  
-    {req.matSpring === "TFK" && (
-        <>
-        <H1>Wybierz twardość sprężyny</H1>
-        <div className="flex space-x-1">
-        {uniqueH.
-        map((h) => {
-          const product = data.find((product) => (product.h === h && product.spring === req.matSpring));
-          return (
-            <div key={h + ""}>
-              {product && (
-                <Option
-                  product={product}
-                  visibleName={h ?? ""}
-                  handleSelected={() => setMatH(h as Req['matH'] ?? null)}
-                  {...(req.matH === h && { active: true })}
-                />
-              )}
-            </div>
-          );
-        })}
-      </div>
-        
-        </>
-    )}
-
-{req.matSpring && (
-        <>
-        <H1>Wybierz budowę</H1>
-        <div className="flex space-x-1">
-        {uniqueBuild.
-        map((build) => {
-          const product = data.find((product) => (product.h === req.matH 
-            && product.spring === req.matSpring
-            && product.build === build));
-          return (
-            <div key={build + ""}>
-              {product && (
-                <Option
-                  product={product}
-                  visibleName={build ?? ""}
-                  handleSelected={() => setMatBuild(JSON.stringify(product) as Req['matBuild'] ?? null)}
-                  {...(req.matBuild === JSON.stringify(product) && { active: true })}
-                />
-              )}
-            </div>
-          );
-        })}
-      </div>
-        
-        </>
-    )}
-*/}
     </>
   );
 }
