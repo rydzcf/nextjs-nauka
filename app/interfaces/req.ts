@@ -19,9 +19,9 @@ export interface Req {
     matSpring: string | null,
     matH?: "H1" | "H2" | "H3" | "H4" | null,
     matBuild: string | null,
-    pillHeight: "Standard" | "Max" | "Super" | null,
-    pillBuild: "N" | "S" | "E" | "B" | "V" | "A" | "M" | "TH1" | null,
-    pillCover: string | null,
+    pillHeight?: string | null,
+    pillBuild?: string | null,
+    pillCover?: string | null,
     dependencies: Dependency[],
     prevDependencies: Dependency[],
 }

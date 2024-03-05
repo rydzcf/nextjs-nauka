@@ -17,7 +17,7 @@ export function GET(request: NextRequest) {
   });
 
 
-  const data = [
+  const data: Product[] = [
     {
         "name": "Z01",
         "category": "header",
@@ -185,7 +185,7 @@ export function GET(request: NextRequest) {
         "category": "leg",
         "photo": "",
         "price": 1,
-        "index": "NOG-WEW-12a",
+        "index": "NOG-WEW-12",
       },
       {
         "name": "Noga drewniana czarna 12cm",
@@ -259,6 +259,49 @@ export function GET(request: NextRequest) {
         "index": "Pinta-H2-1-213",
         "spring": "TFK",
         "h": "H2"
+      },
+
+
+    {
+        "name": "Orchila",
+        "category": "pillowtop",
+        "photo": "sl03-p.jpg",
+        "price": 9999,
+        "size": 160,
+        "index": "ORCH-EXC-AV-A-160200",
+        "cover": "Aloe Vera",
+        "height": "Standard"
+      },
+    {
+        "name": "Orchila",
+        "category": "pillowtop",
+        "photo": "sl03-p.jpg",
+        "price": 9999,
+        "size": 160,
+        "index": "ORCH-EXC-AA-A-160200",
+        "cover": "Alergik",
+        "height": "Standard",
+        "build" : "A"
+      },
+    {
+        "name": "Orchila",
+        "category": "pillowtop",
+        "photo": "sl03-p.jpg",
+        "price": 9999,
+        "size": 160,
+        "index": "ORCH-EXC-LN-A-160200",
+        "cover": "Len",
+        "height": "Standard"
+      },
+    {
+        "name": "Orchila",
+        "category": "pillowtop",
+        "photo": "sl03-p.jpg",
+        "price": 9999,
+        "size": 160,
+        "index": "ORCH-EXC-MAX-AV-A-160200",
+        "cover": "Aloe Vera",
+        "height": "Maxeror43"
       }
     ]
 
@@ -277,7 +320,7 @@ export function GET(request: NextRequest) {
     const filteredData = data.filter(obj => 
       (!queryParams.size || obj.size === Number(queryParams.size)) &&
       (!queryParams.category || obj.category === queryParams.category) &&
-      (!queryParams.cover || obj.index.includes(`-${queryParams.cover}-`))
+      (!queryParams.cover || (obj.index.includes(`-${queryParams.cover}-`) || obj.cover?.includes(queryParams.cover)))
     );
   
     return new Response(JSON.stringify(filteredData), {

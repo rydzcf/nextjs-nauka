@@ -12,6 +12,7 @@ import SelectBoxName from "./SelectBoxName";
 import SelectLegs from "./SelectLegs";
 import Summary from "./Summary";
 import SelectMat from "./SelectMat";
+import SelectPillowtop from "./SelectPillowtop";
 
 export default function Configurator() {
   const [req, setReq] = useState<Req>({
@@ -146,7 +147,31 @@ export default function Configurator() {
         ...req,
         matBuild
     })
-  }
+}
+    const handlePillCover = (pillCover: Req['pillCover']) => {
+        setReq({
+            ...req,
+            pillCover,
+            pillHeight: null,
+            pillBuild: null
+        })
+    }
+    const handlePillHeight = (pillHeight: Req['pillHeight']) => {
+      setReq({
+        ...req,
+        pillHeight,
+        pillBuild: null
+    })
+    }
+    
+    const handlePillBuild = (pillBuild: Req['pillBuild']) => {
+      setReq({
+        ...req,
+        pillBuild
+      })
+    }
+
+
   return (
     <div className="container mx-auto py-5 flex flex-col items-center">
       <SelectSize handleSize={handleSize} selectedSize={req.size} />
@@ -160,6 +185,7 @@ export default function Configurator() {
       <SelectBoxName req={req} handleBoxName={handleBoxName} />
       <SelectLegs req={req} handleLegs={handleLegs} />
       <SelectMat req={req} setMatSpring={handleMatSpring} setMatH={handleMatH} setMatBuild={handleMatBuild}/>
+      <SelectPillowtop req={req} setPillCover={handlePillCover} setPillHeight={handlePillHeight} setPillBuild={handlePillBuild}/>
       <Summary req={req} />
     </div>
   );

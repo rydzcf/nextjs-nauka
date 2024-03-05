@@ -52,7 +52,7 @@ export default function SelectLegs({req, handleLegs} : Props) {
 
 
   return (
-    <div>
+    <>
          <H1>Wybierz nogi</H1>
     <div className="flex space-x-1">
         {data.filter(product => 
@@ -69,6 +69,6 @@ export default function SelectLegs({req, handleLegs} : Props) {
             )
         })}
     </div>
-    </div>
+    </>
   )
 }

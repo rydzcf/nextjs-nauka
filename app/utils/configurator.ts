@@ -2,6 +2,7 @@ import { LegsIndex, Product } from "../interfaces/api";
 import { Dependency } from "../interfaces/req";
 export async function getData(category: string, cover: string | null, size: number) {
   
+  console.log(`getData: ${category} ${cover} ${size}`)
   if(cover === null) {
     try {
        const res = await fetch(
@@ -17,7 +18,7 @@ export async function getData(category: string, cover: string | null, size: numb
   } else {
   try {
     const res = await fetch(
-      `api/?category=${category}&size=${size}&cover=${cover}`
+      `api/?category=${category}&cover=${cover}&size=${size}`
     );
     const data: Product[] = await res.json();
     return data.sort((a: Product, b: Product) => a.name.localeCompare(b.name))
@@ -52,14 +53,15 @@ export async function getLegsTable(index: string) {
       // console.log(product)
     }
     else {
-      // const emptyProduct:Product = {
-      //   name: "",
-      //   category: "leg",
-      //   price: 99999,
-      //   index: leg.id
-      // }
+      const emptyProduct:Product = {
+        name: "Brak produktu, zadzwoń i poinformuj nas o tym",
+        category: "leg",
+        price: 99999,
+        index: leg.id,
+        size: 0
+      }
 
-      // legs.push(emptyProduct)
+      legsTable.push(emptyProduct)
     }
   }
   return legsTable

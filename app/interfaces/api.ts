@@ -3,7 +3,7 @@ export interface Product {
     category: string;
     photo?: string;
     price: number;
-    size: number;
+    size?: number;
     height?: number | string;
     index: string;
     addons?: string[],
@@ -11,6 +11,7 @@ export interface Product {
     spring?: string | null,
     h?: string | null,
     build?: string | null
+    cover?: string | null
   }
 
 
