@@ -13,8 +13,13 @@ import SelectLegs from "./SelectLegs";
 import Summary from "./Summary";
 import SelectMat from "./SelectMat";
 import SelectPillowtop from "./SelectPillowtop";
+import Q from "./Q";
 
 export default function Configurator() {
+  const [isMattrass, setIsMattrass] = useState(false)
+  const [isPillowtop, setIsPillowtop] = useState(false)
+  const [isSummary, setIsSummary] = useState(false)
+
   const [req, setReq] = useState<Req>({
     size: 160,
     gr: null,
@@ -176,17 +181,24 @@ export default function Configurator() {
     <div className="container mx-auto py-5 flex flex-col items-center">
       <SelectSize handleSize={handleSize} selectedSize={req.size} />
       <SelectTex handleTex={handleTex} />
+      <SelectBoxName req={req} handleBoxName={handleBoxName} />
+      <SelectLegs req={req} handleLegs={handleLegs} />
       <SelectHeaderName req={req} handleHeaderName={handleHeaderName} />
       <SelectHeaderWidth req={req} handleHeaderWidth={handleHeaderWidth} />
       <SelectHeaderHeight
         headerHeightCustom={req.headerHeightCustom}
         setHeaderHeightCustom={handleSetHeaderHeightCustom}
       />
-      <SelectBoxName req={req} handleBoxName={handleBoxName} />
-      <SelectLegs req={req} handleLegs={handleLegs} />
+      <Q question="Czy chcesz dobrać materac?" handleQuestion={()=>console.log("111")}/>
+      {isMattrass ?
       <SelectMat req={req} setMatSpring={handleMatSpring} setMatH={handleMatH} setMatBuild={handleMatBuild}/>
+      : null}
+      {isPillowtop ?
       <SelectPillowtop req={req} setPillCover={handlePillCover} setPillHeight={handlePillHeight} setPillBuild={handlePillBuild}/>
+      : null}
+      {isSummary ? 
       <Summary req={req} />
+      : null}
     </div>
   );
 }

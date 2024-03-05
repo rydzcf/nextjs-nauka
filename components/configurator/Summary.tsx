@@ -18,29 +18,47 @@ export default function Summary({ req }: Props) {
   const [header, setHeader] = useState<Product | null>(null);
   const [mattrass, setMattrass] = useState<Product | null>(null);
   const [pillowtop, setPillowtop] = useState<Product | null>(null);
-  let legs: Product | null = null;
-
+  const [legs, setLegs] = useState<Product | null>(null);
+  const [newLegsPrice, setNewLegsPrice] = useState<number>(0);
 
   const [legsTable, setLegsTable] = useState<Product[] | null>(null);
+  
+  useEffect(() => {
+    if (isStringifyObject(req.boxIndex)) {
+      setBox(JSON.parse(req.boxIndex as string));
+    }
+    else setBox(null)
+
+    setLegs(null)
+    setLegsTable(null)
+  }, [req.boxIndex]);
+
+
+  useEffect(() => {
+    if (req.legs && isStringifyObject(req.legs)) {
+      setLegs(JSON.parse(req.legs as string))
+    } 
+    else setLegs(null)
+  }, [req.legs]);
+  
   useEffect(() => {
     (async () => {
       try {
         if (legs && isStringifyObject(legs.index)) {
           const table = await getLegsTable(legs.index);
-          setLegsTable(table);
-        } else setLegsTable(null);
+          setNewLegsPrice(table.reduce((acc, cur) => acc + cur.price, 0)) 
+          setLegsTable(table)
+        } else {
+          setLegsTable(null);
+          setNewLegsPrice(0);
+        }
       } catch (error) {
-        setLegsTable(null);
         console.log(error);
       }
     })();
-  }, [req.legs]);
+  }, [legs]);
 
-  useEffect(() => {
-    if (isStringifyObject(req.boxIndex)) {
-      setBox(JSON.parse(req.boxIndex as string));
-    }
-  }, [req.boxIndex]);
+
 
   useEffect(() => {
     if (isStringifyObject(req.headerWidth)) {
@@ -61,39 +79,39 @@ export default function Summary({ req }: Props) {
               Math.ceil((req.headerHeightCustom - Number(header.height)) / 20) *
                 0.2);
         }
+        // else setHeader(null)
 
       if (header && header?.height !== req.headerHeightCustom) {
         setHeader({
           ...header,
           index: header.index + "W" + req.headerHeightCustom,
-
           price: newPrice,
         });
       }
     }
   }, [req.headerWidth]);
 
-  if (req.legs && isStringifyObject(req.legs)) {
-    legs = JSON.parse(req.legs as string);
-  }
+  
   
   useEffect(()=> {
   if (req.matBuild && isStringifyObject(req.matBuild)) {
     setMattrass(JSON.parse(req.matBuild as string))
   }
+  else setMattrass(null)
 },[req.matBuild])
 
 useEffect(()=> {
   if (req.pillBuild && isStringifyObject(req.pillBuild)) {
     setPillowtop(JSON.parse(req.pillBuild as string))
   }
+  else setPillowtop(null)
 },[req.pillBuild])
 
 
   return (
     <div className="flex flex-col space-y-3 my-10 justify-start w-full">
       <H1>Podsumowanie</H1>
-
+      <div className="flex border-b"></div>
       <div className="flex">
         <div className="flex-1">
           {header && header.name + " w materiale " + req.tex}
@@ -146,8 +164,15 @@ useEffect(()=> {
       </div>
 
       <div className="flex border-t">
-        <div className="flex-1 text-right">razem</div>
-        <div className="w-24 text-right">{pricify(1)}</div>
+        <div className="flex-1 text-right">razem:</div>
+        <div className="w-24 text-right">
+          {
+          pricify((box ? box.price : 0) + 
+            (header ? header.price : 0) + 
+            (mattrass ? mattrass.price : 0) + 
+            (pillowtop ? pillowtop.price : 0) +
+            (legs ? (newLegsPrice === 0 ? legs.price : newLegsPrice) : 0)
+          )}</div>
       </div>
     </div>
   );

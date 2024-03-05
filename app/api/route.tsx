@@ -31,7 +31,7 @@ export function GET(request: NextRequest) {
         "name": "Z01",
         "category": "header",
         "photo": "sl03-p.jpg",
-        "price": 99999,
+        "price": 1,
         "size": 160,
         "height": 116,
         "index": "Z01-1-16S161"
@@ -76,7 +76,7 @@ export function GET(request: NextRequest) {
         "name": "BOX1",
         "category": "bed",
         "photo": "sl03-p.jpg",
-        "price": 99999,
+        "price": 1,
         "size": 160,
         "index": "BOX1-1-1620",
         "addons": ["legs"]

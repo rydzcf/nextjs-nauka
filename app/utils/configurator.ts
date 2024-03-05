@@ -1,8 +1,6 @@
 import { LegsIndex, Product } from "../interfaces/api";
 import { Dependency } from "../interfaces/req";
 export async function getData(category: string, cover: string | null, size: number) {
-  
-  console.log(`getData: ${category} ${cover} ${size}`)
   if(cover === null) {
     try {
        const res = await fetch(
@@ -50,7 +48,6 @@ export async function getLegsTable(index: string) {
       product.index = product.index + " - " + leg.qty + " szt";
       product.price = product.price*leg.qty;
       legsTable.push(product)
-      // console.log(product)
     }
     else {
       const emptyProduct:Product = {
@@ -72,7 +69,7 @@ export function pricify(number: number) {
   if (!isNaN(Number(number))) {
     return Math.ceil(number).toLocaleString("fr-FR").replace(/,/g, " ") + " PLN";
   }
-  return "- zł";
+  return "- PLN";
 }
 
 // export function finalPrice(cart) {
