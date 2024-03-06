@@ -74,7 +74,8 @@ export default function SelectPillowtop({ req, setPillCover, setPillHeight, setP
           );
         })}
       </div>
-
+        {req.pillCover ? (
+          <>
       <H1>Wybierz wysokość przekładki</H1>
       <div className="flex space-x-1">
         {uniqueHeights
@@ -94,8 +95,11 @@ export default function SelectPillowtop({ req, setPillCover, setPillHeight, setP
           );
         })}
       </div>
+      </>
+      ): null}
       
-      
+      {req.pillCover && req.pillHeight ? (
+        <>
       <H1>Wybierz budowę przekładki</H1>
       <div className="flex space-x-1">
         {data
@@ -115,7 +119,7 @@ export default function SelectPillowtop({ req, setPillCover, setPillHeight, setP
           );
         })}
       </div>
-   
+   </>):null}
     </>
   );
 }

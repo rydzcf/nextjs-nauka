@@ -6,6 +6,6 @@ interface H1Props {
 }
 export default function H1({children, className}: H1Props) {
   return (
-      <div className={`mt-10 mb-5 text-xl ${className}`}>{children}</div>
+      <div className={`mt-14 mb-5 text-xl ${className}`}>{children}</div>
   )
 }
