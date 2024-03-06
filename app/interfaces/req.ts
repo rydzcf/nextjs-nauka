@@ -18,7 +18,7 @@ export interface Req {
     frame?: string | null,
     matSpring?: string | null,
     matH?: "H1" | "H2" | "H3" | "H4" | null,
-    matZone?: "1P" | "2P" | null,
+    matZone?: "1P" | "7P" | null,
     matBuild?: string | null,
     pillHeight?: string | null,
     pillBuild?: string | null,

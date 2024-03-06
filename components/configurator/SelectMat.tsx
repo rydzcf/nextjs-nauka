@@ -60,7 +60,7 @@ export default function SelectMat({ req, setMatSpring, setMatH, setMatBuild }: P
   return (
     <>
       <H1>Wybierz sprężynę materaca</H1>
-      <div className="flex">
+      <div className="flex justify-center">
         {uniqueSprings
         .map((spring) => {
           const product = data.find((product) => product.spring === spring);
@@ -81,7 +81,7 @@ export default function SelectMat({ req, setMatSpring, setMatH, setMatBuild }: P
     {req.matSpring === "TFK" && (
         <>
         <H1>Wybierz twardość sprężyny</H1>
-        <div className="flex space-x-1">
+        <div className="flex justify-center">
         {uniqueH.
         map((h) => {
           const product = data.find((product) => (product.h === h && product.spring === req.matSpring));
@@ -106,7 +106,7 @@ export default function SelectMat({ req, setMatSpring, setMatH, setMatBuild }: P
 {req.matSpring && (
         <>
         <H1>Wybierz budowę</H1>
-        <div className="flex space-x-1">
+        <div className="flex justify-center">
         {uniqueBuild.
         map((build) => {
           const product = data.find((product) => (product.h === req.matH 

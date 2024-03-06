@@ -12,6 +12,7 @@ export interface Product {
     h?: string | null,
     build?: string | null
     cover?: string | null
+    zone?: "1P" | "7P" | null
   }
 
 

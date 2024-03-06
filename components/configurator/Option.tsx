@@ -18,7 +18,7 @@ export default function Option({product, active, visibleName, handleSelected}: P
       style={{objectFit: "cover", width: "100%", height: "100%"}}
       />
       </div>
-      <div className="flex text-xs mt-2 text-wrap max-w-20 text-center">
+      <div className={`flex text-xs mt-2 text-wrap max-w-20 text-center transition ${active ? "underline underline-offset-4" : ""}`}>
       {visibleName}
         </div>
       </div>
