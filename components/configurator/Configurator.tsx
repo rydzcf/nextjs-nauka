@@ -19,7 +19,7 @@ import H1 from "./H1";
 export default function Configurator() {
   const [isMattrass, setIsMattrass] = useState(false)
   const [isPillowtop, setIsPillowtop] = useState(false)
-  const [isSummary, setIsSummary] = useState(false)
+  const [isSummary, setIsSummary] = useState(true)
 
   const [req, setReq] = useState<Req>({
     size: 160,
@@ -31,11 +31,6 @@ export default function Configurator() {
     headerHeightCustom: null,
     boxName: null,
     boxIndex: null,
-    matSpring: null,
-    matBuild: null,
-    pillHeight: null,
-    pillBuild: null,
-    pillCover: null,
     dependencies: [],
     prevDependencies: [],
   });
@@ -51,11 +46,6 @@ export default function Configurator() {
       headerHeightCustom: null,
       boxName: null,
       boxIndex: null,
-      matSpring: null,
-      matBuild: null,
-      pillHeight: null,
-      pillBuild: null,
-      pillCover: null,
       dependencies: [],
       prevDependencies: []
     }));
@@ -128,6 +118,7 @@ export default function Configurator() {
             ...req,
             matH: null,
             matBuild: null,
+            matZone: null,
             matSpring
         })
     } else {
@@ -135,6 +126,7 @@ export default function Configurator() {
         setReq({        
         ...rest,
         matBuild: null,
+        matZone: null,
         matSpring
     })
     }
@@ -144,6 +136,7 @@ export default function Configurator() {
     setReq({
         ...req,
         matH,
+        matZone: null,
         matBuild: null
     })
   }
@@ -192,16 +185,39 @@ export default function Configurator() {
       />
       {req.gr ? 
        <>
-       <H1>Dodatki</H1>
+       <H1>Pozostałe elementy kompletu</H1>
        <div className="flex space-x-6">
        <div className="flex items-center space-x-2 my-5">
         <Switch checked={isMattrass} onCheckedChange={() => {
-          setIsMattrass(!isMattrass)}}/> 
+          setIsMattrass(!isMattrass)
+          if (!isMattrass){
+          setReq({
+            ...req,
+            matSpring: null,
+            matBuild: null,
+            matZone: null,
+          })} else {
+            const {matSpring, matBuild, ...newReq} = req;
+            setReq(newReq);
+          }
+          }}/> 
         <label>materac</label>
       </div>
        <div className="flex items-center space-x-2 my-5">
         <Switch checked={isPillowtop} onCheckedChange={() => {
-          setIsPillowtop(!isPillowtop)}}/> 
+          setIsPillowtop(!isPillowtop)
+          if (!isPillowtop){
+            setReq({
+              ...req,
+              pillHeight: null,
+            pillBuild: null,
+            pillCover: null
+          })} else {
+            const {pillHeight, pillBuild, pillCover, ...newReq} = req;
+            setReq(newReq);
+             
+            }
+          }}/> 
         <label>przekładka</label>
       </div>
       </div>

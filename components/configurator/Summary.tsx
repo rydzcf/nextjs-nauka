@@ -22,32 +22,29 @@ export default function Summary({ req }: Props) {
   const [newLegsPrice, setNewLegsPrice] = useState<number>(0);
 
   const [legsTable, setLegsTable] = useState<Product[] | null>(null);
-  
+
   useEffect(() => {
     if (isStringifyObject(req.boxIndex)) {
       setBox(JSON.parse(req.boxIndex as string));
-    }
-    else setBox(null)
+    } else setBox(null);
 
-    setLegs(null)
-    setLegsTable(null)
+    setLegs(null);
+    setLegsTable(null);
   }, [req.boxIndex]);
-
 
   useEffect(() => {
     if (req.legs && isStringifyObject(req.legs)) {
-      setLegs(JSON.parse(req.legs as string))
-    } 
-    else setLegs(null)
+      setLegs(JSON.parse(req.legs as string));
+    } else setLegs(null);
   }, [req.legs]);
-  
+
   useEffect(() => {
     (async () => {
       try {
         if (legs && isStringifyObject(legs.index)) {
           const table = await getLegsTable(legs.index);
-          setNewLegsPrice(table.reduce((acc, cur) => acc + cur.price, 0)) 
-          setLegsTable(table)
+          setNewLegsPrice(table.reduce((acc, cur) => acc + cur.price, 0));
+          setLegsTable(table);
         } else {
           setLegsTable(null);
           setNewLegsPrice(0);
@@ -58,67 +55,63 @@ export default function Summary({ req }: Props) {
     })();
   }, [legs]);
 
-
-
   useEffect(() => {
-    if (isStringifyObject(req.headerWidth)) {
+    if (req.headerWidth && isStringifyObject(req.headerWidth)) {
       setHeader(JSON.parse(req.headerWidth as string));
-      let defaultPrice = 99999;
-      if (header?.price) defaultPrice = header.price;
-      let newPrice = 0;
-      if (header && header.price && header?.height && req.headerHeightCustom)
-        if (header.height > req.headerHeightCustom) {
-          // zaglowek niższy doliczamy 10% za przeróbkę
-          newPrice = defaultPrice * 1.1;
-        } else {
-          // doliczamy + 10% za przeróbkę i + 20% za każde rozczpoczęte 20cm
-          newPrice =
-            defaultPrice *
-            1.1 *
-            (1 +
-              Math.ceil((req.headerHeightCustom - Number(header.height)) / 20) *
-                0.2);
-        }
-        // else setHeader(null)
-
-      if (header && header?.height !== req.headerHeightCustom) {
-        setHeader({
-          ...header,
-          index: header.index + "W" + req.headerHeightCustom,
-          price: newPrice,
-        });
-      }
-    }
+    } else setHeader(null);
   }, [req.headerWidth]);
 
-  
-  
-  useEffect(()=> {
-  if (req.matBuild && isStringifyObject(req.matBuild)) {
-    setMattrass(JSON.parse(req.matBuild as string))
-  }
-  else setMattrass(null)
-},[req.matBuild])
+  useEffect(() => {
+    // Wczesne wyjście, jeśli brakuje wymaganych danych.
+    if (!header || !header.price || !header.height || !req.headerHeightCustom) {
+      return;
+    }
 
-useEffect(()=> {
-  if (req.pillBuild && isStringifyObject(req.pillBuild)) {
-    setPillowtop(JSON.parse(req.pillBuild as string))
-  }
-  else setPillowtop(null)
-},[req.pillBuild])
+    const { price, index } = JSON.parse(req.headerWidth as string);
 
+    let newPrice = price;
+    let newIndex = index;
+
+    if (header.height !== req.headerHeightCustom) {
+      newIndex += "W" + req.headerHeightCustom;
+
+      if (header.height > req.headerHeightCustom) {
+        // Zagłówek niższy, doliczamy 10% za przeróbkę.
+        newPrice *= 1.1;
+      } else {
+        // Doliczamy +10% za przeróbkę i +20% za każde rozpoczęte 20cm.
+        newPrice *=
+          1.1 *
+          (1 +
+            Math.ceil((req.headerHeightCustom - Number(header.height)) / 20) *
+              0.2);
+      }
+    }
+
+    setHeader({
+      ...header,
+      price: newPrice,
+      index: newIndex,
+    });
+  }, [req.headerHeightCustom]);
+
+  useEffect(() => {
+    if (req.matBuild && isStringifyObject(req.matBuild)) {
+      setMattrass(JSON.parse(req.matBuild as string));
+    } else setMattrass(null);
+  }, [req.matBuild]);
+
+  useEffect(() => {
+    if (req.pillBuild && isStringifyObject(req.pillBuild)) {
+      setPillowtop(JSON.parse(req.pillBuild as string));
+    } else setPillowtop(null);
+  }, [req.pillBuild]);
 
   return (
     <div className="flex flex-col space-y-3 my-10 justify-start w-full">
       <H1>Podsumowanie</H1>
       <div className="flex border-b"></div>
-      <div className="flex">
-        <div className="flex-1">
-          {header && header.name + " w materiale " + req.tex}
-        </div>
-        <div className="flex-1">{header && header.index}</div>
-        <div className="w-24 text-right">{header && pricify(header.price)}</div>
-      </div>
+
       <div className="flex">
         <div className="flex-1">
           {box && box.name + " w materiale " + req.tex}
@@ -146,6 +139,18 @@ useEffect(()=> {
       ) : (
         legs && <Loading />
       )}
+      
+      
+      
+      <div className="flex">
+        <div className="flex-1">
+          {header && header.name + " w materiale " + req.tex}
+        </div>
+        <div className="flex-1">{header && header.index}</div>
+        <div className="w-24 text-right">{header && pricify(header.price)}</div>
+      </div>
+
+      
 
       <div className="flex">
         <div className="flex-1">{mattrass && mattrass.name}</div>
@@ -166,13 +171,14 @@ useEffect(()=> {
       <div className="flex border-t">
         <div className="flex-1 text-right">razem:</div>
         <div className="w-24 text-right">
-          {
-          pricify((box ? box.price : 0) + 
-            (header ? header.price : 0) + 
-            (mattrass ? mattrass.price : 0) + 
-            (pillowtop ? pillowtop.price : 0) +
-            (legs ? (newLegsPrice === 0 ? legs.price : newLegsPrice) : 0)
-          )}</div>
+          {pricify(
+            (box ? box.price : 0) +
+              (header ? header.price : 0) +
+              (mattrass ? mattrass.price : 0) +
+              (pillowtop ? pillowtop.price : 0) +
+              (legs ? (newLegsPrice === 0 ? legs.price : newLegsPrice) : 0)
+          )}
+        </div>
       </div>
     </div>
   );

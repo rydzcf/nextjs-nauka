@@ -28,22 +28,7 @@ export default function SelectLegs({req, handleLegs} : Props) {
   if (!data) return (<Loading />) 
 
   
-  
 
-  const testIndex: LegsIndex[] = 
-      [
-        {
-        id: "INDEX-ONE-LEG",
-        qty: 2
-      },
-      {
-        id: "INDEX-ONE-LEG",
-        qty: 2
-      }
-    ]
-  
-
-  // console.log((JSON.stringify(testIndex)))
 
 
   const handleOption = (product: Product) => {
@@ -54,7 +39,7 @@ export default function SelectLegs({req, handleLegs} : Props) {
   return (
     <>
          <H1>Wybierz nogi</H1>
-    <div className="flex space-x-1">
+    <div className="flex">
         {data.filter(product => 
             (product.fit?.includes(req.boxName as string) || product.fit?.length === 0)
         ).map(product => {

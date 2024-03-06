@@ -55,7 +55,7 @@ export default function SelectHeaderName({ req, handleBoxName }: Props) {
   return (
     <>
         <H1>Wybierz box</H1>
-    <div className="flex space-x-1">
+    <div className="flex">
   {data && Array.from(new Set(data.map((product) => product.name))) // Tworzenie unikalnych nazw produktów
     .map((uniqueName) => {
       const product = data.find((product) => product.name === uniqueName); // Znalezienie pierwszego produktu z unikalną nazwą
