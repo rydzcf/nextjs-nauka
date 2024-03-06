@@ -11,9 +11,10 @@ interface Props {
   setMatSpring: (value: string | null) => void;
   setMatH: (value: Req['matH']) => void;
   setMatBuild: (value: Req['matBuild']) => void;
+  setMatZone: (value: Req['matZone']) => void;
 }
 
-export default function SelectMat({ req, setMatSpring, setMatH, setMatBuild }: Props) {
+export default function SelectMat({ req, setMatSpring, setMatH, setMatBuild, setMatZone }: Props) {
   const [data, setData] = useState<Product[] | null>(null);
   
   useEffect(() => {
@@ -43,6 +44,14 @@ export default function SelectMat({ req, setMatSpring, setMatH, setMatBuild }: P
     return Array.from(new Set(hs as string[])).sort((a:string, b:string) => a.localeCompare(b));
   }, [data, req.matSpring]);
   
+  const uniqueZone = useMemo(() => {
+    if (!data || !req.matSpring) return [];
+    const zones = data
+    .filter(product => product.spring === req.matSpring)
+    .map((product) => product.zone)
+    .filter((value) => value !== null && value !== undefined);
+    return Array.from(new Set(zones as string[])).sort((a:string, b:string) => a.localeCompare(b));
+  }, [data, req.matSpring]);
 
   const uniqueBuild = useMemo(() => {
     if (!data || !req.matSpring) return [];
@@ -51,7 +60,7 @@ export default function SelectMat({ req, setMatSpring, setMatH, setMatBuild }: P
     .map((product) => product.build)
     .filter((value) => value !== null && value !== undefined);
     return Array.from(new Set(builds as string[])).sort((a:string, b:string) => a.localeCompare(b));
-  }, [data, req.matSpring, req.matH]);
+  }, [data, req.matSpring, req.matH, req.matZone]);
 
 
 
@@ -78,7 +87,37 @@ export default function SelectMat({ req, setMatSpring, setMatH, setMatBuild }: P
           );
         })}
       </div>
-    {req.matSpring === "TFK" && (
+    
+      {req.matSpring ? (
+        <>
+        <H1>Wybierz polowość</H1>
+        <div className="flex justify-center">
+        {uniqueZone.
+        map((zone) => {
+          const product = data.find((product) => (product.zone === zone 
+            && product.spring === req.matSpring));
+          return (
+            <div key={zone + ""}>
+              {product && (
+                <Option
+                  product={product}
+                  visibleName={zone ?? ""}
+                  handleSelected={() => setMatZone(zone as Req['matZone'] ?? null)}
+                  {...(req.matZone === zone && { active: true })}
+                />
+              )}
+            </div>
+          );
+        })}
+      </div>
+        
+        </>
+    ): null}
+
+
+
+
+    {(req.matSpring === "TFK" && req.matZone) ? (
         <>
         <H1>Wybierz twardość sprężyny</H1>
         <div className="flex justify-center">
@@ -101,9 +140,9 @@ export default function SelectMat({ req, setMatSpring, setMatH, setMatBuild }: P
       </div>
         
         </>
-    )}
+    ): null}
 
-{req.matSpring && (
+{(req.matSpring && req.matZone) ? (
         <>
         <H1>Wybierz budowę</H1>
         <div className="flex justify-center">
@@ -128,7 +167,7 @@ export default function SelectMat({ req, setMatSpring, setMatH, setMatBuild }: P
       </div>
         
         </>
-    )}
+    ): null}
 
     </>
   );

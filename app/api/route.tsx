@@ -28,6 +28,123 @@ export function GET(request: NextRequest) {
         "index": "Z01-1-16S181"
       },
     {
+        "name": "Z11",
+        "category": "header",
+        "photo": "sl03-p.jpg",
+        "price": 100,
+        "size": 160,
+        "height": 116,
+        "index": "Z011-1-16S181"
+      },
+    {
+        "name": "Z12",
+        "category": "header",
+        "photo": "sl03-p.jpg",
+        "price": 100,
+        "size": 160,
+        "height": 116,
+        "index": "Z012-1-16S181"
+      },
+    {
+        "name": "Z13",
+        "category": "header",
+        "photo": "sl03-p.jpg",
+        "price": 100,
+        "size": 160,
+        "height": 116,
+        "index": "Z013-1-16S181"
+      },
+    {
+        "name": "Z14",
+        "category": "header",
+        "photo": "sl03-p.jpg",
+        "price": 100,
+        "size": 160,
+        "height": 116,
+        "index": "Z014-1-16S181"
+      },
+    {
+        "name": "Z15",
+        "category": "header",
+        "photo": "sl03-p.jpg",
+        "price": 100,
+        "size": 160,
+        "height": 116,
+        "index": "Z015-1-16S181"
+      },
+    {
+        "name": "Z16",
+        "category": "header",
+        "photo": "sl03-p.jpg",
+        "price": 100,
+        "size": 160,
+        "height": 116,
+        "index": "Z016-1-16S181"
+      },
+    {
+        "name": "Z17",
+        "category": "header",
+        "photo": "sl03-p.jpg",
+        "price": 100,
+        "size": 160,
+        "height": 116,
+        "index": "Z017-1-16S181"
+      },
+    {
+        "name": "Z17",
+        "category": "header",
+        "photo": "sl03-p.jpg",
+        "price": 100,
+        "size": 160,
+        "height": 116,
+        "index": "Z017-1-16S181"
+      },
+    {
+        "name": "Z18",
+        "category": "header",
+        "photo": "sl03-p.jpg",
+        "price": 100,
+        "size": 160,
+        "height": 116,
+        "index": "Z018-1-16S181"
+      },
+    {
+        "name": "Z19",
+        "category": "header",
+        "photo": "sl03-p.jpg",
+        "price": 100,
+        "size": 160,
+        "height": 116,
+        "index": "Z019-1-16S181"
+      },
+    {
+        "name": "Z20",
+        "category": "header",
+        "photo": "sl03-p.jpg",
+        "price": 100,
+        "size": 160,
+        "height": 116,
+        "index": "Z020-1-16S181"
+      },
+    {
+        "name": "Z21",
+        "category": "header",
+        "photo": "sl03-p.jpg",
+        "price": 100,
+        "size": 160,
+        "height": 116,
+        "index": "Z021-1-16S181"
+      },
+    {
+        "name": "Z22",
+        "category": "header",
+        "photo": "sl03-p.jpg",
+        "price": 100,
+        "size": 160,
+        "height": 116,
+        "index": "Z022-1-16S181"
+      },
+    {
         "name": "Z01",
         "category": "header",
         "photo": "sl03-p.jpg",
@@ -227,7 +344,19 @@ export function GET(request: NextRequest) {
         "size": 160,
         "index": "Pinta-H3-1-213",
         "spring": "TFK",
-        "build": "2S2"
+        "build": "2S2",
+        "zone" : "1P"
+      },
+    {
+        "name": "Materac Pinta",
+        "category": "mattress",
+        "photo": "sl03-p.jpg",
+        "price": 9999,
+        "size": 160,
+        "index": "Pinta-H3-7P-1-213",
+        "spring": "TFK",
+        "build": "2S2",
+        "zone" : "7P"
       },
     {
         "name": "Materac Pinta",

@@ -132,12 +132,20 @@ export default function Configurator() {
     }
   }
 
+  const handleMatZone = (matZone: Req['matZone'] ) => {
+    setReq({
+        ...req,
+        matZone,
+        matH: null,
+        matBuild: null
+    })
+  }
   const handleMatH = (matH: Req['matH'] ) => {
     setReq({
         ...req,
         matH,
-        matZone: null,
         matBuild: null
+
     })
   }
 
@@ -197,7 +205,7 @@ export default function Configurator() {
             matBuild: null,
             matZone: null,
           })} else {
-            const {matSpring, matBuild, ...newReq} = req;
+            const {matSpring, matBuild, matH, matZone, ...newReq} = req;
             setReq(newReq);
           }
           }}/> 
@@ -225,7 +233,7 @@ export default function Configurator() {
 : null}
 
       {isMattrass ?
-      <SelectMat req={req} setMatSpring={handleMatSpring} setMatH={handleMatH} setMatBuild={handleMatBuild}/>
+      <SelectMat req={req} setMatSpring={handleMatSpring} setMatH={handleMatH} setMatBuild={handleMatBuild} setMatZone={handleMatZone}/>
       : null}
       {isPillowtop ?
       <SelectPillowtop req={req} setPillCover={handlePillCover} setPillHeight={handlePillHeight} setPillBuild={handlePillBuild}/>
