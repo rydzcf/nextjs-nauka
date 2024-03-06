@@ -75,7 +75,7 @@ export default function Summary({ req }: Props) {
     if (header.height !== req.headerHeightCustom) {
       newIndex += "W" + req.headerHeightCustom;
 
-      if (header.height > req.headerHeightCustom) {
+      if (Number(header.height) > Number(req.headerHeightCustom)) {
         // Zagłówek niższy, doliczamy 10% za przeróbkę.
         newPrice *= 1.1;
       } else {
