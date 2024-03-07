@@ -18,9 +18,9 @@ import H1 from "./H1";
 import SelectFun from "./SelectFun";
 
 export default function Configurator() {
-  const [isMattrass, setIsMattrass] = useState(false)
-  const [isPillowtop, setIsPillowtop] = useState(false)
-  const [isSummary, setIsSummary] = useState(true)
+  const [isMattrass, setIsMattrass] = useState(false);
+  const [isPillowtop, setIsPillowtop] = useState(false);
+  const [isSummary, setIsSummary] = useState(false);
 
   const [req, setReq] = useState<Req>({
     size: 160,
@@ -38,9 +38,9 @@ export default function Configurator() {
   //zerowanie wyborów przy zmianie size albo gr
   useEffect(() => {
     setReq((req) => ({
-        tex: req.tex,
-        size: req.size,
-        gr: req.gr,
+      tex: req.tex,
+      size: req.size,
+      gr: req.gr,
       headerName: null,
       headerWidth: null,
       headerHeight: null,
@@ -48,9 +48,20 @@ export default function Configurator() {
       boxName: null,
       boxIndex: null,
       dependencies: [],
-      prevDependencies: []
+      prevDependencies: [],
     }));
   }, [req.size, req.gr]);
+
+
+  useEffect(() => {
+    for (const key in req) {
+      if (req[key] === null) {
+        setIsSummary(false)
+        return
+      }
+    }
+    setIsSummary(true)
+  },[req])
 
   const handleSize = (size: number) => {
     setReq({
@@ -111,7 +122,7 @@ export default function Configurator() {
       legs: JSON.stringify(product),
     });
   };
-  
+
   const handleFun = (product: Product) => {
     setReq({
       ...req,
@@ -121,141 +132,152 @@ export default function Configurator() {
 
   const handleMatSpring = (matSpring: string | null) => {
     //dodaje do obiektu req klucz matH ale tylko wtedy kiedy wybierzemy sprezyne TFK, bo tylko ona ma wtwardosc
-    if(matSpring === "TFK") {
-        setReq({        
-            ...req,
-            matH: null,
-            matBuild: null,
-            matZone: null,
-            matSpring
-        })
+    if (matSpring === "TFK") {
+      setReq({
+        ...req,
+        matH: null,
+        matBuild: null,
+        matZone: null,
+        matSpring,
+      });
     } else {
-        const { matH, ...rest } = req;
-        setReq({        
+      const { matH, ...rest } = req;
+      setReq({
         ...rest,
         matBuild: null,
         matZone: null,
-        matSpring
-    })
+        matSpring,
+      });
     }
-  }
+  };
 
-  const handleMatZone = (matZone: Req['matZone'] ) => {
+  const handleMatZone = (matZone: Req["matZone"]) => {
     setReq({
-        ...req,
-        matZone,
-        matH: null,
-        matBuild: null
-    })
-  }
-  const handleMatH = (matH: Req['matH'] ) => {
+      ...req,
+      matZone,
+      matH: null,
+      matBuild: null,
+    });
+  };
+  const handleMatH = (matH: Req["matH"]) => {
     setReq({
-        ...req,
-        matH,
-        matBuild: null
+      ...req,
+      matH,
+      matBuild: null,
+    });
+  };
 
-    })
-  }
-
-  const handleMatBuild = (matBuild: Req['matBuild'] ) => {
+  const handleMatBuild = (matBuild: Req["matBuild"]) => {
     setReq({
-        ...req,
-        matBuild
-    })
-}
-    const handlePillCover = (pillCover: Req['pillCover']) => {
-        setReq({
-            ...req,
-            pillCover,
-            pillHeight: null,
-            pillBuild: null
-        })
-    }
-    const handlePillHeight = (pillHeight: Req['pillHeight']) => {
-      setReq({
-        ...req,
-        pillHeight,
-        pillBuild: null
-    })
-    }
-    
-    const handlePillBuild = (pillBuild: Req['pillBuild']) => {
-      setReq({
-        ...req,
-        pillBuild
-      })
-    }
+      ...req,
+      matBuild,
+    });
+  };
+  const handlePillCover = (pillCover: Req["pillCover"]) => {
+    setReq({
+      ...req,
+      pillCover,
+      pillHeight: null,
+      pillBuild: null,
+    });
+  };
+  const handlePillHeight = (pillHeight: Req["pillHeight"]) => {
+    setReq({
+      ...req,
+      pillHeight,
+      pillBuild: null,
+    });
+  };
 
+  const handlePillBuild = (pillBuild: Req["pillBuild"]) => {
+    setReq({
+      ...req,
+      pillBuild,
+    });
+  };
 
   return (
     <div className="container mx-auto py-5 flex flex-col items-center">
       <SelectSize handleSize={handleSize} selectedSize={req.size} />
       <SelectTex handleTex={handleTex} />
       <SelectBoxName req={req} handleBoxName={handleBoxName} />
-     
-      {('legs' in req) &&
-  <SelectLegs req={req} handleLegs={handleLegs} />
-}
-      {('fun' in req) &&
-  <SelectFun req={req} handleFun={handleFun} />
-}
-      
+
+      {"legs" in req && <SelectLegs req={req} handleLegs={handleLegs} />}
+      {"fun" in req && <SelectFun req={req} handleFun={handleFun} />}
+
       <SelectHeaderName req={req} handleHeaderName={handleHeaderName} />
       <SelectHeaderWidth req={req} handleHeaderWidth={handleHeaderWidth} />
       <SelectHeaderHeight
         headerHeightCustom={req.headerHeightCustom}
         setHeaderHeightCustom={handleSetHeaderHeightCustom}
       />
-      {req.gr ? 
-       <>
-       <H1>Pozostałe elementy kompletu</H1>
-       <div className="flex space-x-6">
-       <div className="flex items-center space-x-2 my-5">
-        <Switch checked={isMattrass} onCheckedChange={() => {
-          setIsMattrass(!isMattrass)
-          if (!isMattrass){
-          setReq({
-            ...req,
-            matSpring: null,
-            matBuild: null,
-            matZone: null,
-          })} else {
-            const {matSpring, matBuild, matH, matZone, ...newReq} = req;
-            setReq(newReq);
-          }
-          }}/> 
-        <label>materac</label>
-      </div>
-       <div className="flex items-center space-x-2 my-5">
-        <Switch checked={isPillowtop} onCheckedChange={() => {
-          setIsPillowtop(!isPillowtop)
-          if (!isPillowtop){
-            setReq({
-              ...req,
-              pillHeight: null,
-            pillBuild: null,
-            pillCover: null
-          })} else {
-            const {pillHeight, pillBuild, pillCover, ...newReq} = req;
-            setReq(newReq);
-             
-            }
-          }}/> 
-        <label>przekładka</label>
-      </div>
-      </div>
-      </>
-: null}
+      {req.gr ? (
+        <>
+          <H1>Pozostałe elementy kompletu</H1>
+          <div className="flex space-x-6">
+            <div className="flex items-center space-x-2 my-5">
+              <Switch
+                checked={isMattrass}
+                onCheckedChange={() => {
+                  setIsMattrass(!isMattrass);
+                  if (!isMattrass) {
+                    setReq({
+                      ...req,
+                      matSpring: null,
+                      matBuild: null,
+                      matZone: null,
+                    });
+                  } else {
+                    const { matSpring, matBuild, matH, matZone, ...newReq } =
+                      req;
+                    setReq(newReq);
+                  }
+                }}
+              />
+              <label>materac</label>
+            </div>
+            <div className="flex items-center space-x-2 my-5">
+              <Switch
+                checked={isPillowtop}
+                onCheckedChange={() => {
+                  setIsPillowtop(!isPillowtop);
+                  if (!isPillowtop) {
+                    setReq({
+                      ...req,
+                      pillHeight: null,
+                      pillBuild: null,
+                      pillCover: null,
+                    });
+                  } else {
+                    const { pillHeight, pillBuild, pillCover, ...newReq } = req;
+                    setReq(newReq);
+                  }
+                }}
+              />
+              <label>przekładka</label>
+            </div>
+          </div>
+        </>
+      ) : null}
 
-      {isMattrass ?
-      <SelectMat req={req} setMatSpring={handleMatSpring} setMatH={handleMatH} setMatBuild={handleMatBuild} setMatZone={handleMatZone}/>
-      : null}
-      {isPillowtop ?
-      <SelectPillowtop req={req} setPillCover={handlePillCover} setPillHeight={handlePillHeight} setPillBuild={handlePillBuild}/>
-      : null}
-      {isSummary ? 
-      <Summary req={req} />
-      : null}
+      {isMattrass ? (
+        <SelectMat
+          req={req}
+          setMatSpring={handleMatSpring}
+          setMatH={handleMatH}
+          setMatBuild={handleMatBuild}
+          setMatZone={handleMatZone}
+        />
+      ) : null}
+      {isPillowtop ? (
+        <SelectPillowtop
+          req={req}
+          setPillCover={handlePillCover}
+          setPillHeight={handlePillHeight}
+          setPillBuild={handlePillBuild}
+        />
+      ) : null}
+      {isSummary ? <Summary req={req} /> : null}
     </div>
   );
 }

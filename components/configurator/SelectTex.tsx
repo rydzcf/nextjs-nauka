@@ -32,7 +32,7 @@ export default function SelectTex({ handleTex }: Prop) {
       type="text"
       value={tex}
       name="tex"
-      className={`flex ml-2 bg-transparent w-20 border-white outline-none py-1 px-2 border-b text-xl ${isValid ? 'text-green-700' : 'text-red-700'} focus:outline-none`}
+      className={`flex ml-2 bg-transparent rounded-none w-20 border-white outline-none py-1 px-2 border-b text-xl ${isValid ? 'text-green-700' : 'text-red-700'} focus:outline-none`}
       onChange={handleChange}
       maxLength={5} />
 </label>

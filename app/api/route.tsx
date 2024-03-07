@@ -222,7 +222,7 @@ export function GET(request: NextRequest) {
         "photo": "sl03-p.jpg",
         "price": 99999,
         "size": 160,
-        "index": "RR34MTFK-FUN-1-1620",
+        "index": "RR34MTFK-FUN-XX-1-1620",
         "addons": ["fun"]
       },
     {
@@ -255,7 +255,7 @@ export function GET(request: NextRequest) {
         "category": "fun",
         "photo": "sl03-p.jpg",
         "price": 99999,
-        "index": "06",
+        "index": "FUN-06",
         "fit" : ["RR34MTFK-FUN"]
       },
       {
@@ -263,7 +263,7 @@ export function GET(request: NextRequest) {
         "category": "fun",
         "photo": "sl03-p.jpg",
         "price": 99999,
-        "index": "08",
+        "index": "FUN-08",
         "fit" : ["RR34MTFK-FUN"]
       },
 

@@ -4,6 +4,7 @@ import { getData } from "@/app/utils/configurator";
 import React, { useEffect, useState } from "react";
 import H1 from "./H1";
 import Loading from "./Loading";
+import Mark from "./Mark";
 import Option from "./Option";
 
 interface Props {
@@ -41,7 +42,7 @@ export default function SelectHeaderWidth({ req, handleHeaderWidth }: Props) {
 
   return (
     <>
-<H1>Ile zagłówek ma wystawać poza korpus?</H1>
+<H1>Ile zagłówek ma wystawać poza korpus?<Mark value={req.headerWidth}></Mark></H1>
     
     <div className="flex flex-wrap justify-center">
   {data && Array.from(new Set(data.map((product) => product.index))) // Tworzenie unikalnych nazw produktów

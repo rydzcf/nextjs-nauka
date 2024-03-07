@@ -4,6 +4,7 @@ import { getData } from "@/app/utils/configurator";
 import React, { useEffect, useState } from "react";
 import H1 from "./H1";
 import Loading from "./Loading";
+import Mark from "./Mark";
 import Option from "./Option";
 
 interface Props {
@@ -54,7 +55,7 @@ export default function SelectHeaderName({ req, handleBoxName }: Props) {
 
   return (
     <>
-        <H1>Wybierz box</H1>
+        <H1>Wybierz box<Mark value={req.boxName}></Mark></H1>
     <div className="flex flex-wrap justify-center">
   {data && Array.from(new Set(data.map((product) => product.name))) // Tworzenie unikalnych nazw produktów
     .map((uniqueName) => {

@@ -37,7 +37,6 @@ export default function Summary({ req }: Props) {
       setLegs(JSON.parse(req.legs as string));
     } else setLegs(null);
   }, [req.legs]);
- 
 
   useEffect(() => {
     (async () => {
@@ -117,7 +116,9 @@ export default function Summary({ req }: Props) {
         <div className="flex-1">
           {box && box.name + " w materiale " + req.tex}
         </div>
-        <div className="flex-1">{box && box.index}</div>
+        <div className="flex-1">
+          {box && (req.fun ? box.index.replace("FUN-XX", req.fun) : box.index)}
+        </div>
         <div className="w-24 text-right">{box && pricify(box.price)}</div>
       </div>
 
@@ -140,9 +141,7 @@ export default function Summary({ req }: Props) {
       ) : (
         legs && <Loading />
       )}
-      
-      
-      
+
       <div className="flex">
         <div className="flex-1">
           {header && header.name + " w materiale " + req.tex}
@@ -150,8 +149,6 @@ export default function Summary({ req }: Props) {
         <div className="flex-1">{header && header.index}</div>
         <div className="w-24 text-right">{header && pricify(header.price)}</div>
       </div>
-
-      
 
       <div className="flex">
         <div className="flex-1">{mattrass && mattrass.name}</div>

@@ -5,6 +5,7 @@ import { getData } from '@/app/utils/configurator';
 import H1 from './H1';
 import Loading from './Loading';
 import Option from "./Option";
+import Mark from './Mark';
 
 interface Props {
   req: Req;
@@ -55,7 +56,7 @@ export default function SelectPillowtop({ req, setPillCover, setPillHeight, setP
   if (!data) return <Loading />;
   return (
     <>
-      <H1>Wybierz pokrowiec przekładki</H1>
+      <H1>Wybierz pokrowiec przekładki<Mark value={req.pillCover ?? null}></Mark></H1>
       <div className="flex flex-wrap justify-center">
         {uniqueCovers
         .map((cover) => {
@@ -76,7 +77,7 @@ export default function SelectPillowtop({ req, setPillCover, setPillHeight, setP
       </div>
         {req.pillCover ? (
           <>
-      <H1>Wybierz wysokość przekładki</H1>
+      <H1>Wybierz wysokość przekładki<Mark value={req.pillHeight ?? null}></Mark></H1>
       <div className="flex flex-wrap justify-center">
         {uniqueHeights
         .map((height) => {
@@ -100,7 +101,7 @@ export default function SelectPillowtop({ req, setPillCover, setPillHeight, setP
       
       {req.pillCover && req.pillHeight ? (
         <>
-      <H1>Wybierz budowę przekładki</H1>
+      <H1>Wybierz budowę przekładki<Mark value={req.pillBuild ?? null}></Mark></H1>
       <div className="flex flex-wrap justify-center">
         {data
         .filter(product => (product.cover === req.pillCover && product.height === req.pillHeight))
