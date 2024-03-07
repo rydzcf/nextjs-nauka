@@ -8,49 +8,39 @@ import Option from "./Option";
 
 interface Props {
     req: Req;
-    handleLegs: (product: Product) => void;
+    handleFun: (product: Product) => void;
   }
-export default function SelectLegs({req, handleLegs} : Props) {
+export default function SelectFun({req, handleFun} : Props) {
   const [data, setData] = useState<Product[] | null>(null);
 
   useEffect(() => {
     (async () => {
-      if (req.boxName === null || !("legs" in req)) return
+      if (req.boxName === null || !("fun" in req)) return
       
       const dataFromFile: Product[] = (await getData(
-        "legs",
+        "fun",
         null,
-        req.size
+        null
       )) as Product[];
       setData(dataFromFile);
     })();
-  }, [req.size, req.boxName]);
-  if (req.boxName === null || !("legs" in req)) return null
+  }, [req.boxName]);
   if (!data) return (<Loading />) 
-
-  
-
-
-
-  const handleOption = (product: Product) => {
-    handleLegs(product)
-}
-
 
   return (
     <>
-         <H1>Wybierz nogi</H1>
+         <H1>Wybierz fundament</H1>
     <div className="flex flex-wrap justify-center">
         {data.filter(product => 
             (product.fit?.includes(req.boxName as string) || product.fit?.length === 0)
         ).map(product => {
             return(
                 <Option
-            key={product.index}
+              key={product.index}
               product={product}
               visibleName={product.name}
-              handleSelected={handleOption}
-              {...(req.legs === JSON.stringify(product) && { active: true })}
+              handleSelected={() => handleFun(product)}
+              {...(req.fun === product.index && { active: true })}
             />
             )
         })}

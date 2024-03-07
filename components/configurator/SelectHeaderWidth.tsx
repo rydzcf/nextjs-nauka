@@ -43,7 +43,7 @@ export default function SelectHeaderWidth({ req, handleHeaderWidth }: Props) {
     <>
 <H1>Ile zagłówek ma wystawać poza korpus?</H1>
     
-    <div className="flex">
+    <div className="flex flex-wrap justify-center">
   {data && Array.from(new Set(data.map((product) => product.index))) // Tworzenie unikalnych nazw produktów
     .sort((a: string, b: string) => a.localeCompare(b))
     .map((uniqueName) => {

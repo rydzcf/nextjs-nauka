@@ -56,7 +56,7 @@ export default function SelectPillowtop({ req, setPillCover, setPillHeight, setP
   return (
     <>
       <H1>Wybierz pokrowiec przekładki</H1>
-      <div className="flex space-x-1">
+      <div className="flex flex-wrap justify-center">
         {uniqueCovers
         .map((cover) => {
           const product = data.find((product) => product.cover === cover);
@@ -77,7 +77,7 @@ export default function SelectPillowtop({ req, setPillCover, setPillHeight, setP
         {req.pillCover ? (
           <>
       <H1>Wybierz wysokość przekładki</H1>
-      <div className="flex space-x-1">
+      <div className="flex flex-wrap justify-center">
         {uniqueHeights
         .map((height) => {
           const product = data.find((product) => product.height === height);
@@ -101,7 +101,7 @@ export default function SelectPillowtop({ req, setPillCover, setPillHeight, setP
       {req.pillCover && req.pillHeight ? (
         <>
       <H1>Wybierz budowę przekładki</H1>
-      <div className="flex space-x-1">
+      <div className="flex flex-wrap justify-center">
         {data
         .filter(product => (product.cover === req.pillCover && product.height === req.pillHeight))
         .map((product, index) => {

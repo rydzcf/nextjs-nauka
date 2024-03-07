@@ -1,7 +1,7 @@
 import { LegsIndex, Product } from "../interfaces/api";
 import { Dependency } from "../interfaces/req";
-export async function getData(category: string, cover: string | null, size: number) {
-  if(cover === null) {
+export async function getData(category: string, cover: string | null, size: number | null) {
+  if(cover === null && size !== null) {
     try {
        const res = await fetch(
         `api/?category=${category}&size=${size}`
@@ -13,7 +13,18 @@ export async function getData(category: string, cover: string | null, size: numb
       return null
     }
   
-  } else {
+  } else if(cover === null && size === null) {
+    try {
+       const res = await fetch(
+        `api/?category=${category}`
+       );
+       const data: Product[] = await res.json();
+       return data
+    } catch (error) {
+      console.log(error)
+      return null
+    }
+  }else {
   try {
     const res = await fetch(
       `api/?category=${category}&cover=${cover}&size=${size}`
@@ -25,6 +36,9 @@ export async function getData(category: string, cover: string | null, size: numb
     return null
   }}
 }
+
+
+
 export async function getOne(index: string) {
   try {
     const res = await fetch(

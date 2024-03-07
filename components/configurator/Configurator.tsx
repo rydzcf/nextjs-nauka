@@ -15,6 +15,7 @@ import SelectMat from "./SelectMat";
 import SelectPillowtop from "./SelectPillowtop";
 import { Switch } from "../ui/switch";
 import H1 from "./H1";
+import SelectFun from "./SelectFun";
 
 export default function Configurator() {
   const [isMattrass, setIsMattrass] = useState(false)
@@ -110,6 +111,13 @@ export default function Configurator() {
       legs: JSON.stringify(product),
     });
   };
+  
+  const handleFun = (product: Product) => {
+    setReq({
+      ...req,
+      fun: product.index,
+    });
+  };
 
   const handleMatSpring = (matSpring: string | null) => {
     //dodaje do obiektu req klucz matH ale tylko wtedy kiedy wybierzemy sprezyne TFK, bo tylko ona ma wtwardosc
@@ -184,7 +192,14 @@ export default function Configurator() {
       <SelectSize handleSize={handleSize} selectedSize={req.size} />
       <SelectTex handleTex={handleTex} />
       <SelectBoxName req={req} handleBoxName={handleBoxName} />
-      <SelectLegs req={req} handleLegs={handleLegs} />
+     
+      {('legs' in req) &&
+  <SelectLegs req={req} handleLegs={handleLegs} />
+}
+      {('fun' in req) &&
+  <SelectFun req={req} handleFun={handleFun} />
+}
+      
       <SelectHeaderName req={req} handleHeaderName={handleHeaderName} />
       <SelectHeaderWidth req={req} handleHeaderWidth={handleHeaderWidth} />
       <SelectHeaderHeight

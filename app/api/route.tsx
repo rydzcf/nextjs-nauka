@@ -217,6 +217,15 @@ export function GET(request: NextRequest) {
         "addons": ["legs"]
       },
     {
+        "name": "RR34MTFK-FUN",
+        "category": "bed",
+        "photo": "sl03-p.jpg",
+        "price": 99999,
+        "size": 160,
+        "index": "RR34MTFK-FUN-1-1620",
+        "addons": ["fun"]
+      },
+    {
         "name": "BOX2",
         "category": "bed",
         "photo": "sl03-p.jpg",
@@ -241,7 +250,22 @@ export function GET(request: NextRequest) {
         "size": 140,
         "index": "BOX3-1-1420",
       },
-
+      {
+        "name": "fun-06",
+        "category": "fun",
+        "photo": "sl03-p.jpg",
+        "price": 99999,
+        "index": "06",
+        "fit" : ["RR34MTFK-FUN"]
+      },
+      {
+        "name": "fun-08",
+        "category": "fun",
+        "photo": "sl03-p.jpg",
+        "price": 99999,
+        "index": "08",
+        "fit" : ["RR34MTFK-FUN"]
+      },
 
     {
         "name": "noga do BOX3 i Box1",
@@ -399,7 +423,8 @@ export function GET(request: NextRequest) {
         "size": 160,
         "index": "ORCH-EXC-AV-A-160200",
         "cover": "Aloe Vera",
-        "height": "Standard"
+        "height": "Standard",
+        "build": "A"
       },
     {
         "name": "Orchila",

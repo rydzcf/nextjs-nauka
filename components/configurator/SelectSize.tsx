@@ -8,7 +8,7 @@ interface Props {
 export default function SelectSize({handleSize, selectedSize} : Props) {
   const sizes = [80, 90, 100, 120, 140, 160, 180, 200]
     return (
-    <div className='flex space-x-5'>
+    <div className='flex space-x-5 flex-wrap justify-center'>
         {sizes.map(size => 
             <div key={size + `x200`} className={`cursor-pointer transition ${(size === selectedSize ? "opacity-100" : "opacity-40")}`} onClick={() => handleSize(size)}>
                 {size + `x200`}

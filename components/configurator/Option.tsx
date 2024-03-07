@@ -10,7 +10,7 @@ interface Props {
 
 export default function Option({product, active, visibleName, handleSelected}: Props) {
   return (
-    <div className={`flex flex-col items-center mx-2 my-4 shadow-md cursor-pointer ${active ?  "opacity-100" : "opacity-60"}`}
+    <div className={`flex flex-col items-center mx-2 my-4 shadow-md cursor-pointer transition hover:opacity-100 ${active ?  "opacity-100" : "opacity-60"}`}
     onClick={() => handleSelected(product)}>
       <div className="w-20 h-20 rounded-full overflow-hidden">
       <img src={`https://placehold.co/100x100?text=${visibleName}`} 

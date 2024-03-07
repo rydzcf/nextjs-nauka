@@ -16,14 +16,14 @@ export default function SelectHeaderHeight({ headerHeightCustom, setHeaderHeight
   
 
   return (
-    <div className="flex items-center mt-10">
+    <div className="flex items-baseline mt-10">
     <H1 className="flex mt-0 mb-0">Podaj wysokość zagłówka</H1>
     <label className="flex items-center">
     <input
       type="number"
       value={headerHeightCustom? headerHeightCustom : 0}
       name="headerHeightCustom"
-      className={`flex ml-2 bg-transparent w-18 border-white py-1 px-2 border-b text-xl focus:outline-none`}
+      className={`flex ml-2 bg-transparent w-18 outline-none border-white py-1 px-2 border-b text-xl focus:outline-none`}
       onChange={handleChange}
       min={60}
       max={160} />

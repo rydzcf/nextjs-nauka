@@ -37,6 +37,7 @@ export default function Summary({ req }: Props) {
       setLegs(JSON.parse(req.legs as string));
     } else setLegs(null);
   }, [req.legs]);
+ 
 
   useEffect(() => {
     (async () => {
